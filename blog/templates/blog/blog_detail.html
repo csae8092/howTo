@@ -1,0 +1,24 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% block scriptHeader %}
+    <!-- markdwon extension https://github.com/richleland/pygments-css -->
+    <link rel="stylesheet" href="{% static 'staticblog/css/colorful.css' %}"/></link>
+    <style>
+        img { max-width:1000px; height:auto; margin: 25px auto;display:block }
+    </style>
+{% endblock %}
+{% block content %}
+
+<div class="container">
+<h1>{{ object.title }}</h1>
+<h3>{{ object.author }}</h3>
+<h4>{{ object.status }}</h4>
+
+{{ md_text|safe }}
+<hr/>
+
+<a href="{% url 'dynamicblog:serialize_text' slug=object.slug %}">save blog text as md</a><br/>
+<a href="{% url 'dynamicblog:update_text' slug=object.slug %}">update blog</a>
+
+</div>
+{% endblock %}

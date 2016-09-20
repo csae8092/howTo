@@ -1,0 +1,14 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% block scriptHeader %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+<h1> all blogs</h1>
+
+{% for object in object_list %}
+    <li><a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">{{ object.title }}</a></li>
+{% endfor %}
+</div>
+{% endblock %}

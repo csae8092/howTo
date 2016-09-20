@@ -1,0 +1,12 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+
+#Ipython Notebook
+.ipynb_checkpoints
+
+/db.sqlite3
+/howto/settings/pandorfer_local.py
+/howto/settings/server.py
+/playAndTry.ipynb
+/howto/db.sqlite3

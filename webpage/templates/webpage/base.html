@@ -1,0 +1,125 @@
+{% load staticfiles %}
+{% load webpage_extras %}
+{% load account_extras %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>{% block Titel %} {% projects_metadata 'title' %}{% endblock %}</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      {% block metaDescription %}
+      <meta name="description" content="{{ metadata.description }}">
+      {% endblock %}
+      <meta name="author" content="{{ metadata.author }}">
+      <!-- Bootstrap -->
+      <link rel="stylesheet" href="{% static 'webpage/libraries/bootstrap335/css/bootstrap.min.css' %}"/></link>
+      <!-- custom css -->
+      <link rel="stylesheet" href="{% static 'webpage/css/style.css' %}"/></link>
+      <!--scroll to top CSS -->
+      <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}"></link>
+      <!-- jQuery -->
+      <script type="text/javascript" src="{% static 'webpage/libraries/jquery/jquery.js' %}"></script>
+      <!--scroll to top -->
+      <script src="{% static 'webpage/libraries/scroll-to-top/js/ap-scroll-top.min.js'%}"></script>
+      <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":"{% url 'webpage:imprint' %}","theme":"dark-bottom"};
+        </script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+      <!-- End Cookie Consent plugin -->
+      {% block scriptHeader %}
+      {% endblock %}
+  </head>
+
+  <body role="document">
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation!</span>
+            <span class="icon-bar"/>
+            <span class="icon-bar"/>
+            <span class="icon-bar"/>
+          </button>
+        </div>  
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% projects_metadata 'title' %}
+                  <span class="caret"/>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'webpage:start' %}">{% projects_metadata 'title' %}</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'webpage:imprint' %}">Impressum / Imprint</a>
+                    </li>
+                  </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                {% if user.is_authenticated %}
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"/>&nbsp;{{ user.get_username }}
+                  </a>
+                {% else %}
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"/>
+                  </a>
+                {% endif %}
+                {% login_tag %}
+              </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="alert alert-danger">
+      <strong>Be Aware!</strong> This Site/Service is at a very early state of developement. Everything can change at any time.
+    </div>
+
+    <section class="main-content">
+      <div id="content" class="container">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </section>
+
+    <footer>
+      <div class="row text-center">
+        <div class="col-sm-4">
+          <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank">
+              <img src="{% static 'webpage/img/ACDH_kurz_Weiss.png' %}" alt="ACDH" width="25%"/>   
+          </a>
+        </div>
+        <div class="col-sm-4">
+            <a href="{% projects_metadata 'github' %}" class="navlink" target="_blank">
+              <img src="{% static 'webpage/img/GitHub-Mark-Light-64px.png' %}" alt="{{ metadata.github }}" width="10%"/>   
+            </a>
+        </div>
+        <div class="col-sm-4">
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="navlink" target="_blank">
+              <img src="{% static 'webpage/img/by-sa.png' %}" alt="CC-BY-SA-4.0" width="25%"/>                 
+            </a>
+        </div>
+      </div>  
+    </footer>
+    {% block scripts %}
+    <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>
+    <!-- scroll-up-bottom -->        
+    <script type="text/javascript">
+            // Setup plugin with default settings
+            $(document).ready(function() {
+                $.apScrollTop({
+                    'onInit': function(evt) {
+                        console.log('apScrollTop: init');
+                    }
+                });
+            });
+    </script>    
+    {% endblock %}
+  </body>
+</html>

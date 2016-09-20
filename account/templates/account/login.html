@@ -1,0 +1,16 @@
+{% extends "webpage/base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="container">
+ {% load crispy_forms_tags %}
+
+<form method="post" action="" class="form-signin">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="hidden" name="next" value="{% url 'webpage:start' %}">
+    <button type="submit" class="btn btn-primary">Log-in</button>
+
+</form>
+
+{% endblock %}

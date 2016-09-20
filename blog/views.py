@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 import markdown2
 import requests
@@ -25,21 +26,35 @@ def serialize_text(request, slug):
     return response
 
 
-def update_text(request, slug):
-    if request.user.is_authenticated():
-        user_name = "{}/".format(request.user.blogauthor.github_name)
-    else:
-        return redirect('dynamicblog:post_detail', slug=slug)
+@login_required
+def update(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    base_url = 'https://raw.githubusercontent.com/'
-    path = 'howto/master/blog/posts/'
-    file = "{}".format(slug)
-    file_ending = ".md"
-    url = base_url + user_name + path + file + file_ending
-    with requests.Session() as s:
-        download = s.get(url)
-        decoded_content = download.content.decode('utf-8')
-    post.body = decoded_content
-    post.save()
-
-    return redirect('dynamicblog:post_detail', slug=slug)
+    if request.method == "POST":
+        url = request.POST.get('url', '')
+        with requests.Session() as s:
+            try:
+                r = s.get(url)
+                if r.status_code == requests.codes.ok:
+                    print("past eh ois", r.status_code)
+                    decoded_content = r.content.decode('utf-8')
+                    post.body = decoded_content
+                    post.save()
+                    md_text = markdown2.markdown(post.body, extras=["fenced-code-blocks"])
+                    return render(
+                        request, 'blog/blog_detail.html',
+                        {'object': post, 'md_text': md_text, 'updated': 'Text successfully updated'}
+                    )
+                else:
+                    print("oho", r.status_code)
+                    return render(
+                        request, 'blog/blog_detail.html',
+                        {'object': post, 'md_text': md_text, 'error': r.status_code}
+                    )
+            except:
+                print("soemthing is wrong", url)
+                md_text = markdown2.markdown(post.body, extras=["fenced-code-blocks"])
+                return render(request, 'blog/blog_detail.html',
+                    {'object': post, 'md_text': md_text, 'error': 'something went wrong'})
+    else:
+        md_text = markdown2.markdown(post.body, extras=["fenced-code-blocks"])
+        return render(request, 'blog/blog_detail.html', {'object': post, 'md_text': md_text})

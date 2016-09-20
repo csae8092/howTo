@@ -11,14 +11,36 @@
 
 <div class="container">
 <h1>{{ object.title }}</h1>
-<h3>{{ object.author }}</h3>
-<h4>{{ object.status }}</h4>
+<h3>by {{ object.author }}</h3>
+<h4>status: {{ object.status }}</h4>
+<h5>tags</h5>
+{% for tag in object.tags.all %}
+    <li>{{ tag }}</li>
+{% endfor %}
+
+{% if updated %}
+{{ updated }}
+{% endif %}
+
+{% if error %}
+{{ error }}
+{% endif %}
 
 {{ md_text|safe }}
 <hr/>
+{% if user.is_authenticated %}
+<form action="{% url 'dynamicblog:update_text' slug=object.slug %}" method="POST">
+{% csrf_token %}
+  <div class="form-group">
+    <label for="url">url to the repo</label>
+    <input type="url" class="form-control" id="email" required="true" name="url">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% endif %}
 
 <a href="{% url 'dynamicblog:serialize_text' slug=object.slug %}">save blog text as md</a><br/>
-<a href="{% url 'dynamicblog:update_text' slug=object.slug %}">update blog</a>
+
 
 </div>
 {% endblock %}

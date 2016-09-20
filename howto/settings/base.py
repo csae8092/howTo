@@ -16,7 +16,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__, '../'))))
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -30,6 +29,7 @@ INSTALLED_APPS = [
     'django_filters',
     'django_tables2',
     'crispy_forms',
+    'taggit',
     'webpage',
     'account',
     'blog',

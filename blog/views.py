@@ -26,10 +26,13 @@ def serialize_text(request, slug):
 
 
 def update_text(request, slug):
+    if request.user.is_authenticated():
+        user_name = "{}/".format(request.user.blogauthor.github_name)
+    else:
+        return redirect('dynamicblog:post_detail', slug=slug)
     post = get_object_or_404(Post, slug=slug)
     base_url = 'https://raw.githubusercontent.com/'
-    user_name = 'csae8092/'
-    path = 'HowToDigEdWebApp/master/blog/data/'
+    path = 'howto/master/blog/posts/'
     file = "{}".format(slug)
     file_ending = ".md"
     url = base_url + user_name + path + file + file_ending

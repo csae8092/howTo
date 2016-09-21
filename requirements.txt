@@ -9,6 +9,7 @@ django-extensions==1.6.1
 django-filter==0.13.0
 django-markdown-deux==1.0.5
 django-tables2==1.1.6
+django-taggit==0.21.2
 djangorestframework==3.2.4
 djangorestframework-csv==1.4.1
 ipykernel==4.2.1

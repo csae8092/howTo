@@ -10,3 +10,5 @@ __pycache__/
 /howto/settings/server.py
 /playAndTry.ipynb
 /howto/db.sqlite3
+/howto/settings/server_local.py
+/Untitled.ipynb

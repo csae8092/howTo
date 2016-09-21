@@ -6,17 +6,20 @@ import requests
 from .models import Post
 
 
+@login_required
 def post_list(request):
     posts = Post.objects.all()
     return render(request, 'blog/blog_list.html', {'object_list': posts})
 
 
+@login_required
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     md_text = markdown2.markdown(post.body, extras=["fenced-code-blocks"])
     return render(request, 'blog/blog_detail.html', {'object': post, 'md_text': md_text})
 
 
+@login_required
 def serialize_text(request, slug):
     post = get_object_or_404(Post, slug=slug)
     md_text = post.body
@@ -53,7 +56,8 @@ def update(request, slug):
             except:
                 print("soemthing is wrong", url)
                 md_text = markdown2.markdown(post.body, extras=["fenced-code-blocks"])
-                return render(request, 'blog/blog_detail.html',
+                return render(
+                    request, 'blog/blog_detail.html',
                     {'object': post, 'md_text': md_text, 'error': 'something went wrong'})
     else:
         md_text = markdown2.markdown(post.body, extras=["fenced-code-blocks"])

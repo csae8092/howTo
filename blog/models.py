@@ -5,8 +5,10 @@ from taggit.managers import TaggableManager
 
 
 class BlogAuthor(models.Model):
+    """ a customized/extended User profile """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     github_name = models.CharField(max_length=250, blank=True)
+    redmine_name = models.CharField(max_length=250, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -19,6 +21,13 @@ class Post(models.Model):
         ('draft', 'draft'),
         ('published', 'published')
     )
+
+    AUDIENCE_CHOICES = (
+        ('ACDH-CORE', 'ACDH-CORE'),
+        ('ACDH-EXTENDED', 'ACDH-EXTENDED'),
+        ('ALL', 'ALL'),
+    )
+
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     author = models.ForeignKey(BlogAuthor, related_name='blog_posts')
@@ -27,6 +36,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
+    audience = models.CharField(max_length=10, choices=AUDIENCE_CHOICES, default='ACDH-CORE')
     tags = TaggableManager()
 
     class Meta:

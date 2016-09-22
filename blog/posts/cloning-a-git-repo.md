@@ -5,14 +5,15 @@ This post describes how to clone a ACDH-Redmine Repo.
 To start working with GIT you first have to **clone** the already existing repo called **okopenko-working-data**. To clone the repository you have to 
 
 * log in to [Redmine](https://acdh.oeaw.ac.at/redmine/login) the ACDH's project management tool. 
-* Then browse to the repository, either by navigating there or by following this link https://acdh.oeaw.ac.at/redmine/projects/okopenko-diaries/repository.
+* Then browse to the repository, either by navigating there or by following this link [https://acdh.oeaw.ac.at/redmine/projects/okopenko-diaries/repository](https://acdh.oeaw.ac.at/redmine/projects/okopenko-diaries/repository).
 * There you find on the right sight of the screen a headline saying: **Repository access links**, with two buttons called **SSH** and **HTTPS** an input filed filled with some URL. 
 * Select **HTTPS** and the link in the input field follow now this pattern: https://{yourUserName}@acdh.oeaw.ac.at/redmine/{nameOfTheRepo}.git.
 
 <img style="display:block; margin-left: auto; margin-right: auto; width:50%" src="https://github.com/csae8092/howto/raw/master/blog/posts/img/cloning-a-git-repo/2.jpg"/>
 
-* Copy this link
-*On your local machine (PC, Laptop) open your file explorer and browse to any directory which should contain the repositories data. Maybe something like, `C:\documentes\okopenko-project\`.
+* Copy this link on your local machine (PC, Laptop),
+* open your file explorer,
+* and browse to any directory which should contain the repositories data. Maybe something like, `C:\documentes\okopenko-project\`.
 * Because you have [TortoiseGit](https://tortoisegit.org/) installed, you can now perform a **right mouse click** and see some GIT-commands provided by Tortoise. 
 * Select **Git Clone...**.
 

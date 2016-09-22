@@ -31,7 +31,7 @@
 
 {{ md_text|safe }}
 <hr/>
-{% if user.is_authenticated %}
+{% if request.user.is_superuser %}
 <form action="{% url 'dynamicblog:update_text' slug=object.slug %}" method="POST">
 {% csrf_token %}
   <div class="form-group">
@@ -41,6 +41,11 @@
   <button type="submit" class="btn btn-default">update</button>
 </form>
 {% endif %}
+{% for group in user.groups.all %}
+    {% if group.name == 'testgroup' %}
+        HALLO HANSI
+    {% endif %}
+{% endfor %}
 
 <a href="{% url 'dynamicblog:serialize_text' slug=object.slug %}">save blog text as md</a><br/>
 

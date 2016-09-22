@@ -1,5 +1,8 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
+{% block Titel %}
+{{ object.slug }}
+{% endblock %}
 {% block scriptHeader %}
     <!-- markdwon extension https://github.com/richleland/pygments-css -->
     <link rel="stylesheet" href="{% static 'blog/css/colorful.css' %}"/></link>
@@ -33,9 +36,9 @@
 {% csrf_token %}
   <div class="form-group">
     <label for="url">url to the repo</label>
-    <input type="url" class="form-control" id="email" required="true" name="url">
+    <input type="url" class="form-control" id="email" required="true" name="url" value="{{ object.repo_url }}">
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="submit" class="btn btn-default">update</button>
 </form>
 {% endif %}
 

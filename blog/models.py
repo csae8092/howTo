@@ -9,6 +9,7 @@ class BlogAuthor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     github_name = models.CharField(max_length=250, blank=True)
     redmine_name = models.CharField(max_length=250, blank=True)
+    website = models.URLField(blank=True)
 
     def __str__(self):
         return self.user.username
@@ -37,6 +38,7 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     audience = models.CharField(max_length=10, choices=AUDIENCE_CHOICES, default='ACDH-CORE')
+    repo_url = models.URLField(blank=True, max_length=300)
     tags = TaggableManager()
 
     class Meta:

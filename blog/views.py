@@ -3,7 +3,17 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 import markdown2
 import requests
-from .models import Post
+from .models import Post, Book
+
+
+@login_required
+def books(request, slug):
+    book = get_object_or_404(Book, slug=slug)
+    posts = Post.objects.filter(book=book)
+    context = {}
+    context["object_list"] = posts
+    context["book"] = book
+    return render(request, 'blog/blog_list.html', context)
 
 
 @login_required

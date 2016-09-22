@@ -15,6 +15,21 @@ class BlogAuthor(models.Model):
         return self.user.username
 
 
+class Book(models.Model):
+    """ A 'Book' groups a series of blogs"""
+    editor = models.ForeignKey(BlogAuthor, related_name='book_editor')
+    title = models.CharField(max_length=250)
+    summary = models.TextField(blank=True)
+    slug = models.SlugField(max_length=250)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('title', )
+
+    def __str__(self):
+        return self.title
+
+
 class Post(models.Model):
     """A Blog-Post objects"""
 
@@ -32,7 +47,8 @@ class Post(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     author = models.ForeignKey(BlogAuthor, related_name='blog_posts')
-    body = models.TextField()
+    summary = models.TextField(blank=True)
+    body = models.TextField(blank=True)
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -40,6 +56,7 @@ class Post(models.Model):
     audience = models.CharField(max_length=10, choices=AUDIENCE_CHOICES, default='ACDH-CORE')
     repo_url = models.URLField(blank=True, max_length=300)
     tags = TaggableManager()
+    book = models.ForeignKey(Book, blank=True, null=True)
 
     class Meta:
         ordering = ('-publish', )

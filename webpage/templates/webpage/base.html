@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load webpage_extras %}
 {% load account_extras %}
+{% load blog_extras %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -77,16 +78,17 @@
                     </li>
                   </ul>
                 </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">dynamic-blog<span class="caret"/>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                        <a href="{% url 'dynamicblog:post_list' %}">Posts</a>
-                    </li>
-                  </ul>
-              </li>
-            </ul>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">dynamic-blog<span class="caret"/>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li>
+                          <a href="{% url 'dynamicblog:post_list' %}">Posts</a>
+                      </li>
+                    </ul>
+                  </li>
+                  {% book_list %}
+              </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
                 {% if user.is_authenticated %}

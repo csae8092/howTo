@@ -6,19 +6,33 @@ import requests
 from .models import Post, Book
 
 
-@login_required
+def filter_posts_by_usergroups(user):
+    """filters posts matching its audience target"""
+    try:
+        group = user.groups.all()[0].name
+        if group == 'ACDH-CORE':
+            posts = Post.objects.all()
+        elif group == 'ACDH-EXTENDED':
+            posts = Post.objects.filter(audience=group)
+    except:
+        posts = Post.objects.filter(audience='PUBLIC')
+    return posts
+
+
 def books(request, slug):
     book = get_object_or_404(Book, slug=slug)
-    posts = Post.objects.filter(book=book)
+    userobject = request.user
+    posts = filter_posts_by_usergroups(userobject).filter(book=book)
+    # posts = Post.objects.filter(book=book)
     context = {}
     context["object_list"] = posts
     context["book"] = book
     return render(request, 'blog/blog_list.html', context)
 
 
-@login_required
 def post_list(request):
-    posts = Post.objects.all()
+    userobject = request.user
+    posts = filter_posts_by_usergroups(userobject)
     return render(request, 'blog/blog_list.html', {'object_list': posts})
 
 

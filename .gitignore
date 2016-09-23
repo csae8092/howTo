@@ -12,3 +12,4 @@ __pycache__/
 /howto/db.sqlite3
 /howto/settings/server_local.py
 /Untitled.ipynb
+/howto/settings/mysql.py

@@ -41,7 +41,7 @@ class Post(models.Model):
     AUDIENCE_CHOICES = (
         ('ACDH-CORE', 'ACDH-CORE'),
         ('ACDH-EXTENDED', 'ACDH-EXTENDED'),
-        ('ALL', 'ALL'),
+        ('PUBLIC', 'PUBLIC'),
     )
 
     title = models.CharField(max_length=250)

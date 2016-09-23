@@ -13,7 +13,7 @@ def filter_posts_by_usergroups(user):
         if group == 'ACDH-CORE':
             posts = Post.objects.all()
         elif group == 'ACDH-EXTENDED':
-            posts = Post.objects.filter(audience=group)
+            posts = Post.objects.filter(audience__in=['ACDH-EXTENDED', 'PUBLIC'])
     except:
         posts = Post.objects.filter(audience='PUBLIC')
     return posts

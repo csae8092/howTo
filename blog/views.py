@@ -36,14 +36,12 @@ def post_list(request):
     return render(request, 'blog/blog_list.html', {'object_list': posts})
 
 
-@login_required
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     md_text = markdown2.markdown(post.body, extras=["fenced-code-blocks"])
     return render(request, 'blog/blog_detail.html', {'object': post, 'md_text': md_text})
 
 
-@login_required
 def serialize_text(request, slug):
     post = get_object_or_404(Post, slug=slug)
     md_text = post.body

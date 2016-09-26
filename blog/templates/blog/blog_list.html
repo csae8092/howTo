@@ -12,6 +12,10 @@ table of content
 {% if book %}
     <h1>{{ book.title }}</h1>
     <p>{{ book.summary }}</p>
+    {% if book.image %}
+        <img src="{{ book.image.url }}" width="300"/>
+    {% endif %}
+
     <p>edited by <a href="{{ book.editor.website }}">{{ book.editor }}</a></p>
 {% else %}
   <h1 class="blog-name">HowTo</h1>

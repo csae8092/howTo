@@ -1,4 +1,4 @@
-{% extends "webpage/base.html" %}
+{% extends "webpage/base_test.html" %}
 {% load staticfiles %}
 {% block Titel %}
 table of content
@@ -6,7 +6,108 @@ table of content
 {% block scriptHeader %}
 {% endblock %}
 {% block content %}
+<style>
+.grid-item {
+  float: left;
+  
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
 
+.grid-item--2 {
+   margin: 1%;
+    border: 5px solid #f52c47;
+    color: #f52c47;
+    float: left;
+    width: calc(94% / 3);
+    background-color: #ffffff;
+    position: relative;
+}
+.grid-item.grid-item--2:hover,
+.grid-item.grid-item--2:hover .post-title,
+.grid-item.grid-item--2:hover .post-subtitle {
+  background-color: #f52c47;
+  color:#ffffff;
+
+}
+.grid-item.grid-item--2:hover .hrmain {
+  border-color: #ffffff;
+}
+
+.grid-item--2 a {
+  color:#f52c47;
+  text-decoration: none;
+}
+
+.grid-item--3 {
+  float: left;
+  width: calc(94% / 3);
+  background: #ffffff;
+  border: 5px solid #007bb4;
+  color:#007bb4;
+  margin:1%;
+  position: relative;
+}
+.grid-item--3 a {
+  color:#007bb4;
+  text-decoration: none;
+}
+.grid-item.grid-item--3:hover,
+.grid-item.grid-item--3:hover .post-title,
+.grid-item.grid-item--3:hover .post-subtitle {
+  background-color: #007bb4;
+  color:#ffffff;
+
+}
+.grid-item.grid-item--3:hover .hrmain {
+  border-color: #ffffff;
+}
+.grid-item--4 {
+  float: left;
+  width: calc(94% / 3);
+  background: #2bb673;
+  position: relative;
+  margin:1%;
+}
+.post-title {
+  
+  font-weight: bold;
+}
+
+.post-subtitle {
+  color: #696969;
+  font-weight: bold;
+}
+
+.grid-item.grid-item--2 .hrmain {
+  border-color: #f52c47;
+}
+.grid-item.grid-item--3 .hrmain {
+  border-color: #007bb4;
+}
+
+#blogjumbo {
+  /*background-color:#bde2db ;*/
+  background-color: #88cbbe;
+  color: #ffffff;
+ 
+  
+    
+
+}
+.blog-name {
+  
+  font-weight: bold;
+}
+
+
+
+</style>
+<!--Mansory JS-->
+<script type="text/javascript" src="https://npmcdn.com/masonry-layout@4.0.0/dist/masonry.pkgd.min.js"></script>
 
 <div class="jumbotron text-center" id="blogjumbo">
 {% if book %}
@@ -18,30 +119,79 @@ table of content
 
     <p>edited by <a href="{{ book.editor.website }}">{{ book.editor }}</a></p>
 {% else %}
-  <h1 class="blog-name">HowTo</h1>
+  <h1 class="blog-name stroke">HowTo</h1>
   <p>A blog about how to do things</p>
 {% endif %}
 </div>
-<div class="container text-center">
- <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div class="text-center">
+ 
+    
+<div class="grid">
         {% for object in object_list %}
-        <div class="post-preview">
+
+        {% if object.book_id == 3 %}
+        
+        <div class="grid-item grid-item--2 post-preview">
+          
             <a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">
                 <h2 class="post-title">
                     {{ object.title }}
                 </h2>
             </a>
+            <hr class="hrmain">
             <h3 class="post-subtitle">
                 {{ object.summary }}
             </h3>
-            <p class="post-meta">Posted by <a href="{{ object.author.website }}">{{ object.author }}</a><br/> on {{ object.created}} (last update {{ object.updated }})
-            </p>
+            <!-- <p class="post-meta">Posted by <a href="{{ object.author.website }}">{{ object.author }}</a><br/> on {{ object.created}} (last update {{ object.updated }})
+            </p> -->
+         
         </div>
-        <hr>
+       
+        {% elif object.book_id == 1 %}
+        <div class="grid-item grid-item--3 post-preview">
+            <a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">
+                <h2 class="post-title">
+                    {{ object.title }}
+                </h2>
+            </a>
+            <hr class="hrmain">
+            <h3 class="post-subtitle">
+                {{ object.summary }}
+            </h3>
+            <!-- <p class="post-meta">Posted by <a href="{{ object.author.website }}">{{ object.author }}</a><br/> on {{ object.created}} (last update {{ object.updated }})
+            </p> -->
+        </div>
+        {% else %}
+        <div class="grid-item grid-item--4 post-preview">
+            <a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">
+                <h2 class="post-title">
+                    {{ object.title }}
+                </h2>
+            </a>
+            <hr class="hrmain">
+            <h3 class="post-subtitle">
+                {{ object.summary }}
+            </h3>
+            <!-- <p class="post-meta">Posted by <a href="{{ object.author.website }}">{{ object.author }}</a><br/> on {{ object.created}} (last update {{ object.updated }})
+            </p> -->
+        </div>
+        {% endif %}
+  
         {% endfor %}
-    </div>
+</div>
+    
+ 
  </div>
- </div>
+ <script type="text/javascript">
+
+$(window).on('load resize', function (){
+// $('.content .right').width( $(this).width() - 480 );
+$('.grid').masonry({
+  // options
+  itemSelector: '.grid-item',
+  // columnWidth: 200
+});
+});
+</script>
     
 {% endblock %}

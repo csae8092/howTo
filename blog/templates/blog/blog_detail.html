@@ -1,4 +1,4 @@
-{% extends "webpage/base.html" %}
+{% extends "webpage/base_test.html" %}
 {% load staticfiles %}
 {% block Titel %}
 {{ object.slug }}
@@ -7,16 +7,56 @@
     <!-- markdwon extension https://github.com/richleland/pygments-css -->
     <link rel="stylesheet" href="{% static 'blog/css/colorful.css' %}"/></link>
     <style>
-        img { max-width:1000px; height:auto; margin: 25px auto;display:block }
+    #content {
+      text-align: justify;
+    }
+      #content  img { 
+          max-width:1000px; 
+          height:auto; 
+          margin: 25px auto;
+          display:block 
+        }
+    
+ 
+     
+    .post-title--3 {
+      font-weight: bold;
+      color: #f52c47;
+    }
+   
+    .post-title--1 {
+      font-weight: bold;
+      color: #007bb4;
+    }
+    .post-meta {
+      font-style: italic;
+
+    }
+  
+
+
+
+
     </style>
 {% endblock %}
 {% block content %}
 
 <div class="container">
-<h1>{{ object.title }}</h1>
-<h3>by {{ object.author }}</h3>
-<h4>status: {{ object.status }}</h4>
-<h5>tags</h5>
+  
+
+{% if object.book_id == 3 %}
+<h1 class="post-title--3">{{ object.title }}</h1>
+<!-- <h3 class="post-author">by {{ object.author }}</h3> -->
+{% elif object.book_id == 1 %}
+<h1 class="post-title--1">{{ object.title }}</h1>
+
+{% endif %}
+
+
+<h3 class="post-meta">Posted by <a href="{{ object.author.website }}">{{ object.author }}</a><br/> on {{ object.created}} (last update {{ object.updated }})
+            </h3>
+<h4 class="post-status">status: {{ object.status }}</h4>
+<h5 class="tags">tags</h5>
 {% for tag in object.tags.all %}
     <li>{{ tag }}</li>
 {% endfor %}

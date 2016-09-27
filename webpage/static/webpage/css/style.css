@@ -17,13 +17,15 @@ header{
 }
 footer{
     flex:0 0 auto;
-    background-color:#333; /*#F8F8F8*/
-    color:#ffffff;
+    /*background-color:#333;*/ /*#F8F8F8*/
+    color:black;
+    background-color: white;
     font-size:13px;
-    padding:20px;
+    padding:40px;
+    /*padding-bottom: 20px;*/
     /* position: absolute;*/
     left:0;
     right:0;
     width:100%;
-    margin-top:10px;
+    /*margin-top:10px;*/
 }

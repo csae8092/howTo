@@ -164,12 +164,12 @@ footer {
       <a class="navbar-brand" href="{% url 'dynamicblog:post_list' %}">HOW TO</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-     <ul class="nav navbar-nav navbar-left">
+      <ul class="nav navbar-nav navbar-left">
         <li>{% book_list %}</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{% url 'webpage:start' %}">ABOUT</a></li>
-        <!-- <li><a href="#contact">CONTACT</a></li> -->
+        <li><a href="{% url 'webpage:imprint' %}">IMPRINT</a></li>
         <li class="dropdown">
                 {% if user.is_authenticated %}
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

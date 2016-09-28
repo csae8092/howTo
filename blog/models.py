@@ -47,6 +47,11 @@ class Post(models.Model):
         ('published', 'published')
     )
 
+    ENCODING_CHOICES = (
+        ('TEI', 'TEI'),
+        ('markdown', 'markdown')
+    )
+
     AUDIENCE_CHOICES = (
         ('ACDH-CORE', 'ACDH-CORE'),
         ('ACDH-EXTENDED', 'ACDH-EXTENDED'),
@@ -63,6 +68,7 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=30, choices=STATUS_CHOICES, default='draft')
     audience = models.CharField(max_length=30, choices=AUDIENCE_CHOICES, default='ACDH-CORE')
+    encoding = models.CharField(max_length=30, choices=ENCODING_CHOICES, default='markdown')
     repo_url = models.URLField(blank=True, max_length=300)
     tags = TaggableManager()
     book = models.ForeignKey(Book, blank=True, null=True)

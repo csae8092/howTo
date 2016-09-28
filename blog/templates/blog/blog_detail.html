@@ -1,4 +1,4 @@
-{% extends "webpage/base_test.html" %}
+{% extends "webpage/base.html" %}
 {% load staticfiles %}
 {% block Titel %}
 {{ object.slug }}
@@ -56,10 +56,10 @@
 <h3 class="post-meta">Posted by <a href="{{ object.author.website }}">{{ object.author }}</a><br/> on {{ object.created}} (last update {{ object.updated }})
             </h3>
 <h4 class="post-status">status: {{ object.status }}</h4>
-<h5 class="tags">tags</h5>
+<!-- <h5 class="tags">tags</h5>
 {% for tag in object.tags.all %}
     <li>{{ tag }}</li>
-{% endfor %}
+{% endfor %} -->
 
 {% if updated %}
 {{ updated }}
@@ -88,13 +88,8 @@
   <button type="submit" class="btn btn-default">update</button>
 </form>
 {% endif %}
-{% for group in user.groups.all %}
-    {% if group.name == 'testgroup' %}
-        HALLO HANSI
-    {% endif %}
-{% endfor %}
 
-<a href="{% url 'dynamicblog:serialize_text' slug=object.slug %}">save blog text as md</a><br/>
+<a href="{% url 'dynamicblog:serialize_text' slug=object.slug %}">export blog text </a><br/>
 
 
 </div>

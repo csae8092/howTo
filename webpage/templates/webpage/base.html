@@ -21,6 +21,8 @@
       <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}"></link>
       <!-- jQuery -->
       <script type="text/javascript" src="{% static 'webpage/libraries/jquery/jquery.js' %}"></script>
+      <!--Isotop-->
+      <script src="https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.js"></script>
       <!--scroll to top -->
       <script src="{% static 'webpage/libraries/scroll-to-top/js/ap-scroll-top.min.js'%}"></script>
       <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
@@ -46,51 +48,140 @@
         <noscript>
             <p><img src="//piwik.apollo.arz.oeaw.ac.at/piwik.php?idsite=38" style="border:0;" alt="" /></p>
         </noscript>
+<style>
+html {
+height: 100%;
+}
+body {
+display: flex;
+flex-direction: column;
+height: 100%;
+font-family: "Lato", sans-serif;
+font-size: 18px;
+}
+.wrap {
+  white-space: pre-wrap;      /* CSS3 */  
+  white-space: -moz-pre-wrap; /* Firefox */    
+  white-space: -pre-wrap;     /* Opera <7 */  
+  white-space: -o-pre-wrap;   /* Opera 7 */    
+  word-wrap: break-word;      /* IE */
+
+} 
+header {
+flex: 0 0 auto;
+}
+.main-content {
+flex: 1 0 auto;
+/*padding-top: 10px;*/
+padding-bottom: 80px;
+}
+footer {
+flex: 0 0 auto;
+}
+.navbar {
+background-color: white;
+font-weight: 900;
+font-size: 20px;
+padding: 10px;
+/*border: none;*/
+}
+.navbar .navbar-brand {
+  font-size: 20px;
+  }
+@font-face {
+font-family: Lato;
+src: url(https://fonts.gstatic.com/s/lato/v11/1YwB1sO8YE1Lyjf12WNiUA.woff2);
+/*font-weight: bold;*/
+/*font-weight: 900;*/
+}
+.navbar li a, .navbar .navbar-brand {
+color: #242424 !important;
+font-family: Lato;
+}
+.navbar-nav li a:hover, .navbar-nav li.active a, .navbar-brand:hover {
+color: #f52c47 !important;
+background-color: #ffffff !important;
+}
+/*.navbar-nav li a:active,
+ .navbar-nav li a:visited,
+ .navbar-nav li a:focus {
+  color:#242424;
+  background-color: #ffffff;
+}*/
+.navbar-default .navbar-nav>.open>a, 
+.navbar-default .navbar-nav>.open>a:hover, 
+.navbar-default .navbar-nav>.open>a:focus {
+   color:#242424;
+  background-color: #ffffff;
+}
+.navbar-brand, .navbar-nav li a {
+line-height: 50px;
+height: 50px;
+padding-top:0;
+}
+.navbar-default .dropdown-menu {
+  background-color: #ffffff;
+}
+.hrfooter {
+  border-color: black;
+  border-width: 2px;
+}
+.navlink img {
+ padding-top: 10px;
+ padding-bottom: 10px;
+ 
+}
+
+#footer-info {
+  border-top: 2px solid #242424;
+  padding-top: 40px;
+
+}
+#acdhlogo,
+#ccbylogo {
+  width: 50%;
+}
+#githublogo {
+  width: 20%;
+}
+a {
+  outline: 0;
+}
+a:focus {
+  outline: 0;
+}
+#blogjumbo {
+  background-color: #e7ecef;
+}
+
+</style>
+
+
 <!-- End Piwik Code -->
       {% block scriptHeader %}
       {% endblock %}
   </head>
 
   <body role="document">
-    <nav class="navbar navbar-default">
-      <div class="container ">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation!</span>
-            <span class="icon-bar"/>
-            <span class="icon-bar"/>
-            <span class="icon-bar"/>
-          </button>
-        </div>  
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% projects_metadata 'title' %}
-                  <span class="caret"/>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                        <a href="{% url 'webpage:start' %}">{% projects_metadata 'title' %}</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'webpage:imprint' %}">Impressum / Imprint</a>
-                    </li>
-                  </ul>
-                </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">dynamic-blog<span class="caret"/>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li>
-                          <a href="{% url 'dynamicblog:post_list' %}">Posts</a>
-                      </li>
-                    </ul>
-                  </li>
-                  {% book_list %}
-              </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
+    <header>
+     <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'dynamicblog:post_list' %}">HOW TO</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+     <ul class="nav navbar-nav navbar-left">
+        <li>{% book_list %}</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'webpage:start' %}">ABOUT</a></li>
+        <li><a href="{% url 'webpage:imprint' %}">IMPRINT</a></li>
+        <li class="dropdown">
                 {% if user.is_authenticated %}
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     <span class="glyphicon glyphicon-user" aria-hidden="true"/>&nbsp;{{ user.get_username }}
@@ -101,40 +192,63 @@
                   </a>
                 {% endif %}
                 {% login_tag %}
-              </li>
-            </ul>
-        </div>
-    </nav>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+</header>
+
     <div class="alert alert-danger">
       <strong>Be Aware!</strong> This Site/Service is at a very early state of developement. Everything can change at any time.
     </div>
 
     <section class="main-content">
+
       <div id="content" class="container">
         {% block content %}
         {% endblock %}
       </div>
+      
     </section>
 
     <footer>
+      
+<!-- <hr class="hrfooter"> -->
+<div class="container" >
+  <div id="footer-info">
       <div class="row text-center">
-        <div class="col-sm-4">
-          <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/ACDH_kurz_Weiss.png' %}" alt="ACDH" width="25%"/>   
+        <div class="col-sm-3">
+        <h4><span class="glyphicon glyphicon-map-marker"></span>  Vienna, Austria</h4>
+        <h4><span class="glyphicon glyphicon-envelope"></span>  acdh-tech@oeaw.ac.at </h4>
+        
+     
+      </div>
+        <div class="col-sm-3">
+          <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank" rel="noopener noreferrer">
+              <img src="{% static 'webpage/img/ACDH_transparent.png' %}" alt="ACDH" id="acdhlogo"/>   
           </a>
         </div>
-        <div class="col-sm-4">
-            <a href="{% projects_metadata 'github' %}" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/GitHub-Mark-Light-64px.png' %}" alt="{{ metadata.github }}" width="10%"/>   
+        <div class="col-sm-3 ">
+            <a href="{% projects_metadata 'github' %}" class="navlink" target="_blank" rel="noopener noreferrer">
+              <img src="{% static 'webpage/img/GitHub-Mark-64px.png' %}" alt="{{ metadata.github }}" id="githublogo"/>   
             </a>
         </div>
-        <div class="col-sm-4">
-            <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/by-sa.png' %}" alt="CC-BY-SA-4.0" width="25%"/>                 
+        <div class="col-sm-3">
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="navlink" target="_blank" rel="noopener noreferrer">
+              <img src="{% static 'webpage/img/by-sa.png' %}" alt="CC-BY-SA-4.0" id="ccbylogo"/>                 
             </a>
         </div>
-      </div>  
+        
+      </div>
+</div>
+</div>
+     
+     
+
     </footer>
+
     {% block scripts %}
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>
@@ -149,6 +263,8 @@
                 });
             });
     </script>
+ 
+
     {% endblock %}
   </body>
 </html>

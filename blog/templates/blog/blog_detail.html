@@ -1,48 +1,43 @@
-{% extends "webpage/base_test.html" %}
+{% extends "webpage/base.html" %}
 {% load staticfiles %}
 {% block Titel %}
 {{ object.slug }}
 {% endblock %}
 {% block scriptHeader %}
     <!-- markdwon extension https://github.com/richleland/pygments-css -->
-    <link rel="stylesheet" href="{% static 'blog/css/colorful.css' %}"/></link>
-    <style>
-    #content {
-      text-align: justify;
-    }
-      #content  img { 
-          max-width:1000px; 
-          height:auto; 
-          margin: 25px auto;
-          display:block 
-        }
-    
- 
+<link rel="stylesheet" href="{% static 'blog/css/colorful.css' %}"/></link>
+<style>
+  #content {
+  text-align: justify;
+/*  margin-top: 100px;*/
+  }
+  #content  img { 
+  max-width:1000px; 
+  height:auto; 
+  margin: 25px auto;
+  display:block 
+  }
      
-    .post-title--3 {
-      font-weight: bold;
-      color: #f52c47;
-    }
+  .post-title--3 {
+  font-weight: bold;
+  color: #f52c47;
+  }
    
-    .post-title--1 {
-      font-weight: bold;
-      color: #007bb4;
-    }
-    .post-meta {
-      font-style: italic;
-
+  .post-title--1 {
+   font-weight: bold;
+   color: #007bb4;
+  }
+  .post-meta {
+  font-style: italic;
+  font-size: 18px;
+ /* font-weight: 600;*/
     }
   
-
-
-
 
     </style>
 {% endblock %}
 {% block content %}
 
-<div class="container">
-  
 
 {% if object.book_id == 3 %}
 <h1 class="post-title--3">{{ object.title }}</h1>
@@ -53,12 +48,12 @@
 {% endif %}
 
 
-<h3 class="post-meta">Posted by <a href="{{ object.author.website }}">{{ object.author }}</a><br/> on {{ object.created}} (last update {{ object.updated }})
+<h3 class="post-meta"><b>Posted by</b> <a href="{{ object.author.website }}">{{ object.author }}</a><br/> on {{ object.created}} (last update {{ object.updated }})
             </h3>
-<h4 class="post-status">status: {{ object.status }}</h4>
-<h5 class="tags">tags</h5>
+<h4 class="post-meta"><b>status:</b> {{ object.status }}</h4>
+<h5 class="post-meta"><b>tags</b></h5>
 {% for tag in object.tags.all %}
-    <li>{{ tag }}</li>
+    <li class="post-meta">{{ tag }}</li>
 {% endfor %}
 
 {% if updated %}
@@ -90,5 +85,5 @@
 <a href="{% url 'dynamicblog:serialize_text' slug=object.slug %}">save blog text as md</a><br/>
 
 
-</div>
+
 {% endblock %}

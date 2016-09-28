@@ -1,9 +1,9 @@
-{% extends "webpage/base_test.html" %}
+{% extends "webpage/base.html" %}
 {% load staticfiles %}
 {% load webpage_extras %}
 {% block content %}
 
-<div class="container text-center">
+
     <div id="myCarousel" class="carousel slide" data-ride="carousel"><!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"/>
@@ -22,9 +22,11 @@
         <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><!--<span class="sr-only">Previous</span>--></a>
         <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><!--<span class="sr-only">Next</span>--></a>
     </div>
-    <h1 style="text-align:center">{% projects_metadata 'title' %}</h1>
+<div class="text-center">
+    <h1>{% projects_metadata 'title' %}</h1>
     <h3>{% projects_metadata 'subtitle' %}</h3>
     <p>{% projects_metadata 'description' %}</p>
 </div>
+
 
 {% endblock %}

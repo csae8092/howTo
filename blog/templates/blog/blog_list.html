@@ -1,4 +1,4 @@
-{% extends "webpage/base_test.html" %}
+{% extends "webpage/base.html" %}
 {% load staticfiles %}
 {% block Titel %}
 table of content
@@ -7,6 +7,7 @@ table of content
 {% endblock %}
 {% block content %}
 <style>
+
 .grid-item {
   float: left;
   
@@ -90,39 +91,41 @@ table of content
 }
 
 #blogjumbo {
-  /*background-color:#bde2db ;*/
-  background-color: #88cbbe;
-  color: #ffffff;
- 
-  
-    
-
+  background-color: #e7ecef;
 }
 .blog-name {
   
   font-weight: bold;
+ /* border-bottom: 3px solid black;*/
 }
-
-
-
+.book-image {
+  border: 5px solid black;
+  margin: 15px;
+}
 </style>
 <!--Mansory JS-->
 <script type="text/javascript" src="https://npmcdn.com/masonry-layout@4.0.0/dist/masonry.pkgd.min.js"></script>
 
+
 <div class="jumbotron text-center" id="blogjumbo">
+  
 {% if book %}
-    <h1>{{ book.title }}</h1>
+    <h1 class="blog-name">{{ book.title }}</h1>
     <p>{{ book.summary }}</p>
     {% if book.image %}
-        <img src="{{ book.image.url }}" width="300"/>
+        <img src="{{ book.image.url }}" width="300" class="book-image"/>
     {% endif %}
 
     <p>edited by <a href="{{ book.editor.website }}">{{ book.editor }}</a></p>
 {% else %}
-  <h1 class="blog-name stroke">HowTo</h1>
+  <h1 class="blog-name">HowTo</h1>
   <p>A blog about how to do things</p>
 {% endif %}
+
 </div>
+
+
+
 <div class="text-center">
  
     

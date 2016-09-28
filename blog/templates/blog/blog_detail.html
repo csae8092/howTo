@@ -69,7 +69,14 @@
 {{ error }}
 {% endif %}
 
+{% if md_text %}
 {{ md_text|safe }}
+{% endif %}
+
+{% if tei_text %}
+{{ tei_text|safe }}
+{% endif %}
+
 <hr/>
 {% if request.user.is_superuser %}
 <form action="{% url 'dynamicblog:update_text' slug=object.slug %}" method="POST">

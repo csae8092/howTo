@@ -24,12 +24,15 @@ def filter_posts_by_usergroups(user):
 def tei_to_html(url, tei):
     """fetches as stylesheet from the given url and transforms an
     xslt transformation on the given TEI-encoded text"""
-
-    r = requests.get(url)
-    xslt = ET.XSLT(ET.fromstring(r.text))
-    xml = ET.fromstring(tei)
-    html = xslt(xml)
-    return ET.tostring(html)
+    try:
+        r = requests.get(url)
+        xslt = ET.XSLT(ET.fromstring(r.text))
+        xml = ET.fromstring(tei)
+        html = xslt(xml)
+        result = ET.tostring(html)
+    except:
+        result = "unfortunately something went wrong"
+    return result
 
 
 def books(request, slug):

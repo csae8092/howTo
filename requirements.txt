@@ -19,6 +19,7 @@ Jinja2==2.8
 jsonschema==2.5.1
 jupyter-client==4.1.1
 jupyter-core==4.0.6
+lxml==3.6.4
 markdown2==2.3.1
 MarkupSafe==0.23
 mistune==0.7.1
@@ -28,6 +29,7 @@ nbformat==4.0.1
 notebook==4.0.6
 path.py==8.1.2
 pickleshare==0.5
+PyGithub==1.28
 Pygments==2.0.2
 pytz==2016.6.1
 PyYAML==3.12

@@ -28,6 +28,7 @@ class Book(models.Model):
     slug = models.SlugField(max_length=250)
     created = models.DateTimeField(auto_now_add=True)
     image = models.FileField(upload_to='book_img', blank=True, null=True)
+    book_color = models.CharField(max_length=250, blank=True)
 
     class Meta:
         ordering = ('title', )

@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.http import HttpResponse
 import markdown2
 import requests
+import lxml.etree as ET
 from .models import Post, Book
 
 
@@ -17,6 +19,20 @@ def filter_posts_by_usergroups(user):
     except:
         posts = Post.objects.filter(audience='PUBLIC')
     return posts
+
+
+def tei_to_html(url, tei):
+    """fetches as stylesheet from the given url and transforms an
+    xslt transformation on the given TEI-encoded text"""
+    try:
+        r = requests.get(url)
+        xslt = ET.XSLT(ET.fromstring(r.text))
+        xml = ET.fromstring(tei)
+        html = xslt(xml)
+        result = ET.tostring(html)
+    except:
+        result = "unfortunately something went wrong"
+    return result
 
 
 def books(request, slug):
@@ -38,8 +54,19 @@ def post_list(request):
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    md_text = markdown2.markdown(post.body, extras=["fenced-code-blocks"])
-    return render(request, 'blog/blog_detail.html', {'object': post, 'md_text': md_text})
+    context = {}
+    prefix = 'https://' if request.is_secure() else 'http://'
+    url = prefix + request.get_host() + static('blog/xslt/tei-to-html.xsl')
+    if post.encoding == "markdown":
+        md_text = markdown2.markdown(post.body, extras=["fenced-code-blocks"])
+        tei_text = None
+    else:
+        md_text = None
+        tei_text = tei_to_html(url, post.body)
+    context['object'] = post
+    context['md_text'] = md_text
+    context['tei_text'] = tei_text
+    return render(request, 'blog/blog_detail.html', context)
 
 
 def serialize_text(request, slug):

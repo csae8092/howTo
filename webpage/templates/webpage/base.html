@@ -72,7 +72,7 @@ flex: 0 0 auto;
 }
 .main-content {
 flex: 1 0 auto;
-/*padding-top: 10px;*/
+padding-top: 20px;
 padding-bottom: 80px;
 }
 footer {
@@ -132,9 +132,8 @@ padding-top:0;
  
 }
 
-#footer-info {
+footer {
   border-top: 2px solid #242424;
-  padding-top: 40px;
 
 }
 #acdhlogo,
@@ -144,16 +143,6 @@ padding-top:0;
 #githublogo {
   width: 20%;
 }
-a {
-  outline: 0;
-}
-a:focus {
-  outline: 0;
-}
-#blogjumbo {
-  background-color: #e7ecef;
-}
-
 </style>
 
 
@@ -175,7 +164,7 @@ a:focus {
       <a class="navbar-brand" href="{% url 'dynamicblog:post_list' %}">HOW TO</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-     <ul class="nav navbar-nav navbar-left">
+      <ul class="nav navbar-nav navbar-left">
         <li>{% book_list %}</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -213,7 +202,9 @@ a:focus {
       
     </section>
 
-    <footer>
+    <footer class="container">
+      
+<!-- <hr class="hrfooter"> -->
       
 <!-- <hr class="hrfooter"> -->
 <div class="container" >
@@ -221,29 +212,27 @@ a:focus {
       <div class="row text-center">
         <div class="col-sm-3">
         <h4><span class="glyphicon glyphicon-map-marker"></span>  Vienna, Austria</h4>
-        <h4><span class="glyphicon glyphicon-envelope"></span>  acdh-tech@oeaw.ac.at </h4>
+        <h4><span class="glyphicon glyphicon-envelope"></span>  acdh@oeaw.ac.at </h4>
         
      
       </div>
         <div class="col-sm-3">
-          <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank" rel="noopener noreferrer">
+          <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank">
               <img src="{% static 'webpage/img/ACDH_transparent.png' %}" alt="ACDH" id="acdhlogo"/>   
           </a>
         </div>
         <div class="col-sm-3 ">
-            <a href="{% projects_metadata 'github' %}" class="navlink" target="_blank" rel="noopener noreferrer">
+            <a href="{% projects_metadata 'github' %}" class="navlink" target="_blank">
               <img src="{% static 'webpage/img/GitHub-Mark-64px.png' %}" alt="{{ metadata.github }}" id="githublogo"/>   
             </a>
         </div>
         <div class="col-sm-3">
-            <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="navlink" target="_blank" rel="noopener noreferrer">
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="navlink" target="_blank">
               <img src="{% static 'webpage/img/by-sa.png' %}" alt="CC-BY-SA-4.0" id="ccbylogo"/>                 
             </a>
         </div>
         
       </div>
-</div>
-</div>
      
      
 

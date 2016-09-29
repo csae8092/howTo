@@ -1,0 +1,260 @@
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?><?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
+	schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>TEI für literaturwissenschaftliche Anwendung</title>
+                <title>Materialien für die Hands-On Session im Rahmen der Tool Gallery 2.2 <q>A gentle
+                    introduction to Text encoding</q>, Wien, 26.9.2016</title>
+                <author>Daniel Schopper (<email>daniel.schopper@oeaw.ac.at</email>)</author>
+            </titleStmt>
+            <publicationStmt>
+                <publisher>
+                    <orgName>Austrian Centre for Digital Humanities</orgName>
+                    <ptr target="http://acdh.oeaw.ac.at"/>
+                    <address>
+                        <street>Sonnenfelsgasse 19</street>
+                        <postCode>1010</postCode>
+                        <settlement>Wien</settlement>
+                    </address>
+                    <date>2016</date>
+                </publisher>
+                <availability>
+                    <licence target="http://creativecommons.org/licenses/by-sa/4.0/">Veröffentlichung
+                        unter der Lizenz CC BY SA 4.0.</licence>
+                </availability>
+                <pubPlace>
+                    <placeName>Wien</placeName>
+                </pubPlace>
+            </publicationStmt>
+            <sourceDesc>
+                <p>Digitales Original.</p>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <p>Diese Aufgaben sollen Sie beim Kodieren Ihres ersten TEI-Dokuments begleiten und Ihnen
+                einige Möglichkeiten aufzeigen, wofür die Guidelines der Text Encoding Initiative
+                genutzt werden können. Wir kodieren in dieser Hands-On Session die Erzählung
+                <title>Unverhofftes Wiedersehen</title> von <persName>Johann Peter Hebel</persName>
+                aus dem Jahre 1811.</p>
+            <p>Ein wichtiges Hilfsmittel für die Arbeit mit dem Vokabular der <title>Guidelines</title>
+                ist die ausführliche Dokumentation und die zahlreichen Beispiele darin. Öffnen Sie am
+                besten die <title>Guidelines</title> während Ihrer Arbeit unter der Adresse <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/">http://www.tei-c.org/release/doc/tei-p5-doc/en/html/</ref>. Dort finden Sie Links zu
+                Listen mit Elementen
+                (<ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/REF-ELEMENTS.html">http://www.tei-c.org/release/doc/tei-p5-doc/en/html/REF-ELEMENTS.html</ref>)
+                und Attributen (<ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/REF-ELEMENTS.html">http://www.tei-c.org/release/doc/tei-p5-doc/en/html/REF-ELEMENTS.html</ref>). </p>
+            <div>
+                <head>Vorbereitung</head>
+                <p>Im Ordner <q>Literatur</q> finden Sie folgende Dateien: <list>
+                    <item>den Roh-Text der Erzählung einer Text-Datei mit dem Namen
+                        <q>Hebel_Wiedersehen.txt</q>,</item>
+                    <item>die Digitalisate der Erzählung: vier PNG-Dateien mit dem Namen
+                        <q>Hebel_Wiedersehen_00x.png</q>
+                    </item>
+                    <item>eine TEI-Version als "Lösungsvorschlag": <q>Hebel_Wiedersehen.xml</q>
+                    </item>
+                </list>
+                </p>
+                <p>Öffnen Sie die Textdatei in einem Text-Editor und kopieren Sie den Text in die
+                    Zwischenablage.</p>
+                <p>Öffnen Sie ein neues TEI-Dokument in Oxygen, indem Sie auf <q>Datei</q> &gt; <q>Neue
+                    Datei</q> klicken und die Vorlage <q>All [TEI P5]</q> auswählen.</p>
+                <p>Markieren Sie den Vorlagentext im<gi>p</gi> Element, löschen Sie ihn und fügen Sie
+                    den kopierten Text aus der Zwischenablage ein.</p>
+                <p>Kontrollieren Sie, ob das Dokument nach wie vor valide ist und speichern Sie es,
+                    beispielsweise unter dem Namen <q>Hebel_Wiedersehen_Uebung.xml</q>
+                </p>
+            </div>
+            <div>
+                <head>TEI Header</head>
+                <p>Zunächst vervollständigen wir den TEI Header um einige wichtige Angaben: </p>
+                <p>Geben Sie einen vollständigen Titel für das TEI-Dokument an: Ersetzen Sie das
+                    <gi>title</gi> Element der Vorlage durch folgendes Konstrukt:</p>
+                <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                    <title type="main">Unverhofftes Wiedersehen</title>
+                    <title type="sub">Digitale Version</title>
+                </egXML>
+                <p>Ergänzen Sie, ebenfalls im Element <gi>titleStmt</gi>, die Autorangabe (<gi>author</gi>) sowie Ihren Namen als Urheber des TEI-Enkodings:</p>
+                <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                    <author>Johann Peter Hebel</author>
+                    <respStmt>
+                        <persName xml:id="encoder">Manuel Mayer</persName>
+                        <resp>TEI-Encoding</resp>
+                    </respStmt>
+                </egXML>
+                <p>Ersetzen Sie den Inhalt von <gi>sourceDesc</gi> durch eine detaillierte
+                    bibliographische Angabe mithilfe des Elements <gi>biblStruct</gi>. Wir setzen die
+                    Erzählung hier als eine unselbständige Publikation innerhalb des
+                    <title>Schatzkästleins des rheinischen Hausfreunds</title> an und verwenden daher
+                    das Element <gi>analytic</gi> dafür. Kodieren Sie, dass <list>
+                        <item>Kodieren Sie, dass sich die Erzählung auf den Seiten 292-294 befindet
+                            (<gi>biblScope</gi>),</item>
+                        <item>ergänzen Sie die abgekürzten Vornamen mithilfe des Elements
+                            <gi>ex</gi>,</item>
+                        <item>weisen Sie die drei Druckorte als Ortsnamen aus.</item>
+                    </list>
+                </p>
+            </div>
+            <div>
+                <head>Titelseite</head>
+                <p>Erstellen Sie ein <gi>front</gi> Element <emph>vor</emph> dem <gi>body</gi>. </p>
+                <p>Kodieren Sie die Titelseite des <title>Schatzkästleins</title> mithilfe der folgenden
+                    Elemente: <gi>titlePage</gi>, <gi>titlePart </gi>, <gi>byline</gi>,
+                    <gi>docEdition</gi> und  <gi>docImprint</gi>.</p>
+                <p>Zeichnen Sie Personen- und Ortsnamen als <gi>persName</gi> bzw. <gi>placeName</gi>
+                    aus.</p>
+                <p>Markieren Sie Zeilenenden mit einem <gi>lb</gi> Element.</p>
+                <p>Setzen Sie <emph>vor</emph> den öffnenden <gi>titlePage</gi>-Tag ein <gi>pb</gi>
+                    Element.</p>
+            </div>
+            <div>
+                <head>Strukturelles Markup</head>
+                <p>Setzen Sie <emph>vor</emph> das <gi>p</gi> Element im <gi>body</gi> ein
+                    <gi>pb</gi>-Element, den Beginn einer neuen Seite kennzeichnet. Ergänzen Sie das Attribut <att>facs</att> mit dem Dateinamen des ersten Bildes (<q>Hebel_Wiedersehen_001.png</q>) und ein Attribut <gi>n</gi> mit der Angabe <val>Titelseite</val>.</p>
+                <p>Kodieren Sie die Überschrift mit <gi>head</gi> und den Erzählungstetxt mit einem <gi>p</gi>.</p>
+                <p>Kodieren Sie die Figurenreden mit <gi>said</gi> Elementen.</p>
+            </div>
+            <div>
+                <head>Auszeichnung des Erscheinungsbildes</head>
+                <p>Kodieren Sie das Erscheinungsbild der Druckvorlage: <list>
+                    <item>Zeilenumbrüche (<gi>lb</gi>)</item>
+                    <item>Seitenumbrüche (<gi>pb</gi>) </item>
+                    <item>Pagina (<tag>fw type="pageNum"</tag>)</item>
+                    <item>horizontale Linie zwischen der Erzählung und der darauf folgenden
+                        (<tag>milestone unit="chapter"</tag>)</item>
+                </list>
+                </p>
+                <p>Kennzeichnen Sie Trennstriche, indem Sie <gi>lb</gi> mit dem Attribut
+                    <att>break</att>
+                    <val>no</val> versehen.</p>
+                <p>Ergänzen Sie ein <gi>encodingDesc</gi>-Element im TEI Header mit einem
+                    <gi>tagsDecl</gi>-Element. Kodieren Sie in mehreren <gi>rendition</gi> Elementen
+                    das Erscheinungsbild der Strukturelemente <gi>head</gi>, <gi>p</gi> und
+                    <gi>said</gi>. Verwenden Sie daffür die folgenden Ausdrücke aus der
+                    Formatierungssprache <abbr>CSS</abbr> (<expan>Cascading Stylesheets</expan>):
+                    entrierung der Überschrift, Einrückung, Anführungszeichen vor und nach Figurenreden).
+                    Verwenden Sie das Attribut <att>selector</att> für die Angabe des Elementnamens. Eine
+                    Übersicht von CSS-Eigenschaften auf Deutsch finden Sie z.B. unter <ref target="https://wiki.selfhtml.org/wiki/CSS/Eigenschaften">https://wiki.selfhtml.org/wiki/CSS/Eigenschaften</ref>.</p>
+                <p>Kodieren Sie die Sperrung der Figurenrede des Pfarrers mithilfe des Elements <tag>hi
+                    rendition="#spaced"</tag>. Ergänzen Sie in der <gi>tagsDecl</gi> dafür ein <gi>rendition</gi>-Element
+                    ohne <att>scope</att> Attribut.</p>
+                <table rows="3" cols="2">
+                    <head>CSS-Formatiernugen</head>
+                    <row role="label">
+                        <cell>Formatierung</cell>
+                        <cell>CSS-Angabe</cell>
+                    </row>
+                    <row>
+                        <cell>Element ist ein eigener Absatz</cell>
+                        <cell>
+                            <code lang="css">display: block;</code>
+                        </cell>
+                    </row>
+                    <row>
+                        <cell>Zentriert</cell>
+                        <cell>
+                            <code lang="css">text-align: center;</code>
+                        </cell>
+                    </row>
+                    <row>
+                        <cell>Einrückung</cell>
+                        <cell>
+                            <code lang="css">text-indent: 1em; </code>
+                        </cell>
+                    </row>
+                    <row>
+                        <cell>Anführungszeichen unten am Anfang direkter Rede</cell>
+                        <cell>
+                            <code lang="css">content: "„";</code>
+                        </cell>
+                    </row>
+                    <row>
+                        <cell>Anführungszeichen oben am Ende direkter Rede</cell>
+                        <cell>
+                            <code lang="css">content: "‟";</code>
+                        </cell>
+                    </row>
+                    <row>
+                        <cell>Gesperrter Text</cell>
+                        <cell>
+                            <code lang="css">letter-spacing: 0.5em;</code>
+                        </cell>
+                    </row>
+                </table>
+            </div>
+            <div>
+                <head>Erweiterung des Headers</head>
+                <p>Erweitern Sie Ihren TEI Header um ein <gi>editorialDecl</gi> Element mit einer
+                    Beschreibung des Verhältnisses zwischen Vorlage und kodiertem Text (Behandlung von
+                    Schaft-S, übergestelltem Umlaut-e, Behandlung der Silbentrennung und Trennungsstrichen) - Verwenden Sie dazu
+                    die Elemente <gi>hyphenation</gi> und <gi>normalization</gi>.</p>
+                <p>Fügen Sie </p>
+            </div>
+            <div>
+                <head>Semantisches Markup</head>
+                <p>
+                    <list type="simple">
+                        <item>Welche <soCalled>benannten Entitäten</soCalled> finden sich im Text?
+                            „Taggen“ Sie sie mit dem entsprechenden TEI-Element (<gi>persName</gi>,
+                            <gi>placeName</gi> und <tag>rs type="event"</tag>), und erstellen Sie einen
+                            Anhang (<gi>back</gi>) mit Listen jedes Typs:
+                            <gi>listPerson</gi>,<gi>listPlace</gi> und <gi>listEvent</gi>. - Unterschied
+                            zw. <gi>person</gi> and <gi>persName</gi> et alt. </item>
+                        <item>Welche Datumsangaben finden Sie im Text? Kodieren Sie sie in einem
+                            maschinenlesbaren Format (<att>when</att>). (Das geht auch bei Angaben wie z.B.
+                            einem jährlich wiederkehrenden Feiertag - Beispiele finden Sie z.B. in der
+                            Element-Dokumentation von  <gi>date</gi>.) </item>
+                    </list>
+                </p>
+            </div>
+            <div>
+                <head>Analytisches Markup</head>
+                <p>Markieren Sie den Beginn eines jeden (zeitlichen) Abschnitts in der Erzählung mit
+                    einem <gi>anchor</gi>-Element mit einem <att>xml:id</att> Attribut.</p>
+                <p>Ergänzen Sie im <gi>back</gi> ein Element <tag>spanGrp type="narration"</tag>, mit
+                    jeweils einem <gi>span</gi>-Element, das den Abschnitt beschreibt. Verweisen Sie mit
+                    den Attributen <att>from</att> und <att>to</att> auf den Anfangs- bzw.
+                    End-<gi>anchor</gi> des jeweiligen Abschnittes.</p>
+                <p>Alternativ dazu: Markieren Sie die Abschnitte im Text mit einem <gi>seg</gi>-Element,
+                    legen Sie eine Liste der Abschnitte als <gi>interpGrp</gi> an, die pro Abschnitt ein
+                    <gi>interp</gi> Element enthält. Verweisen Sie von den <gi>seg</gi>-Elementen mit
+                    einem <att>ana</att> Attribut auf die <gi>interp</gi> Elemente. Worin liegt der
+                    Unterschied, was sind Vor/Nachteile?</p>
+                <p>Erstellen Sie im TEI Header ein Figureninventar im Element <gi>particDesc</gi> in
+                    <gi>profileDesc</gi>, zum Beispiel:</p>
+                <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                    <listPerson type="fictional">
+                        <head>Figureninventar</head>
+                        ...
+                    </listPerson>
+                </egXML>
+                <p>Fügen Sie für jede Person der Handlung in der Erzählung ein <gi>person</gi> Element
+                    mit einer <gi>xml:id</gi> hinzu. Verweisen Sie von der <gi>said</gi>-Elementen auf
+                    die Einträge im Figureninventar mithilfe des Attributes <att>who</att>.</p>
+            </div>
+            <interp/>
+            <div>
+                <head>Weitere Möglichkeiten</head>
+                <p>Verwenden Sie <gi>interp</gi> bzw. <gi>span</gi> zur Markierung von rhetorischen
+                    Figuren.</p>
+                <p>Verwenden Sie <gi>sic</gi> und <gi>corr</gi> innerhalb von <gi>choice</gi> für die
+                    Kennzeichnung von Fehlern im Vorlagentext. Kennzeichnen Sie den Urheber mittels
+                    <att>resp</att> = <val>#encoder</val>.</p>
+                <p>Kodieren Sie die originale Schreibung von Wörtern mit Schaft-S und Umlaut mit
+                    übergestelltem e in <gi>choice</gi> mit <gi>orig</gi> und <gi>reg</gi>. Verwenden Sie dafür z.B. die  Zeichentabelle von Oxygen unter <q>Bearbeiten</q> &gt; <q>Einfügen aus Zeichentabelle</q>. Suchen Sie dafür nach dem Zeichen <q>Combining Latin Small Letter E</q> und fügen Sie es durch Doppelklick <emph>hinter</emph> den Vokal ein. (z.B. uͤ)</p>
+                <p>Fügen Sie einige <gi>note</gi> Elemente mit Fußnoten (<att>type</att> =
+                    <val>footnote</val>) oder Endnoten  (<att>type</att> = <val>endnote</val>) hinzu:
+                    Diese können Sie entweder direkt hinter jene Stelle platzieren, auf die sie sich
+                    beziehen. Oder Sie können Sie in eigenen Abschnitt im <gi>back</gi> setzen und auf
+                    <gi>anchor</gi> Elemente im Text selbst verweisen.</p>
+                <p>Recherchieren Sie Eckdaten zur Entstehung des Textes und dokumentieren Sie diese im
+                    <gi>teiHeader</gi> im <gi>profileDesc</gi> im Element <gi>creation</gi>.</p>
+                <p>Generieren Sie eine HTML-Seite Ihres Textes mit dem Oxygen-Transformationsszenario
+                    <name>TEI P5 XHTML</name>.</p>
+            </div>
+        </body>
+    </text>
+</TEI>

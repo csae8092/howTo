@@ -70,6 +70,7 @@ class Post(models.Model):
     audience = models.CharField(max_length=30, choices=AUDIENCE_CHOICES, default='ACDH-CORE')
     encoding = models.CharField(max_length=30, choices=ENCODING_CHOICES, default='markdown')
     repo_url = models.URLField(blank=True, max_length=300)
+    github_url = models.URLField(blank=True, max_length=300)
     tags = TaggableManager()
     book = models.ForeignKey(Book, blank=True, null=True)
 

@@ -84,6 +84,9 @@
   <button type="submit" class="btn btn-default">update</button>
 </form>
 {% endif %}
+{% if object.github_url %}
+Comment/Edit this post on <a href="{{ object.github_url }}">GitHub</a>.<br/>
+{% endif %}
 
 
 <a href="{% url 'dynamicblog:serialize_text' slug=object.slug %}">export blog text </a><br/>

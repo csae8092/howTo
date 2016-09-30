@@ -10,7 +10,7 @@ The current project tries to combine the advanteges of both worlds.
 * the post's text can be written, modified, edited with any text editor locally **done**
 * posts metadata is edited/stored in application's db **done**
 * the text of the posts can be fetched by the application from any public GitHub account and imported into the app's database **done**
-    * maybe the app can be updated automatically using "GitHub's WebHooks":https://help.github.com/articles/about-webhooks/
+    * maybe the app can be updated automatically using [GitHub's WebHooks](https://help.github.com/articles/about-webhooks/)
     * from the database one should be enabled to load further versions of the text
 * the app renders documents to HTML which were encoded in 
     * markdown **done**
@@ -20,9 +20,9 @@ The current project tries to combine the advanteges of both worlds.
     * everybody (i.e. public)
     * persons related to the hosting institution
     * institution's internal staff. 
-* "RSS":https://docs.djangoproject.com/ja/1.10/ref/contrib/syndication/
-* (sitemap)[https://docs.djangoproject.com/ja/1.10/ref/contrib/sitemaps/]
-* (tags)[https://github.com/alex/django-taggit] **done**
+* [RSS](https://docs.djangoproject.com/ja/1.10/ref/contrib/syndication/)
+* [sitemap](https://docs.djangoproject.com/ja/1.10/ref/contrib/sitemaps/)
+* [tags](https://github.com/alex/django-taggit) **done**
 * searching/filtering
     * by tags
     * fulltext

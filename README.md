@@ -1,17 +1,37 @@
 # howTo
-
 A blog application which uses GitHub as data storage.
 
-Building a blog application with django is easy as fishing in barrel given the plethora of tutorials describing in detail how to build such an application. Such projects usually leverage django's ORM, defining something like a *Posts* model, derive a form from the model (model.form) enabling users to create, edit posts, store all in the application's database and presenting the posts to the audience in nicely rendered HTML leveraging django's template system. 
+##motivation 
+Blog applications usually come along either in form of highly elaborated content managment systems (CMS) (e.g. Wordpress) or static blogs (e.g. Jekyll). The first category provides a rich feature list (tagging, commets, feeds, fultext searches, user management, ...) and is in general very easy to install and use. The downside is that those applications can't be customize without digging into the dephts of the application's codebase. 
+Static blogs like Jekyll instead are propably easyer to customize, especially when it comes to the questions where the content of the blog is actually stored. But they lack many of the features which CMS based blogs provide easily.
+The current project tries to combine the advanteges of both worlds. 
 
-## requirements
+## feature list
+* the post's text can be written, modified, edited with any text editor locally **done**
+* posts metadata is edited/stored in application's db **done**
+* the text of the posts can be fetched by the application from any public GitHub account and imported into the app's database **done**
+    * maybe the app can be updated automatically using "GitHub's WebHooks":https://help.github.com/articles/about-webhooks/
+    * from the database one should be enabled to load further versions of the text
+* the app renders documents to HTML which were encoded in 
+    * markdown **done**
+    * XML/TEI **done**
+* posts can be grouped together into 'books' **done**
+* the application's user management allows to publish posts for **done**
+    * everybody (i.e. public)
+    * persons related to the hosting institution
+    * institution's internal staff. 
+* "RSS":https://docs.djangoproject.com/ja/1.10/ref/contrib/syndication/
+* (sitemap)[https://docs.djangoproject.com/ja/1.10/ref/contrib/sitemaps/]
+* (tags)[https://github.com/alex/django-taggit] **done**
+* searching/filtering
+    * by tags
+    * fulltext
 
-This blog application should stores it's data (and metadata) in the application's database but is linked/synced with a GitHub account. This means 
-* the post's text can be written, modified, edited with any text editor locally,
-* posts metadata is edited/stored in application's db
-* the texts will be pushed to GitHub
-* from there the text can be fetched by the application and imported into its database
-** maybe the app can be updated automatically using "GitHub's WebHooks":https://help.github.com/articles/about-webhooks/
-** From the database one should be enabled to load further versions of the text
+##install
+The application was build with Python 3.4 and django 1.9.x. It was brought to run on Windows and Centos.
 
-Such an approach would leverage the whole battery of django features (e.g. "tags":https://github.com/alex/django-taggit, "RSS":https://docs.djangoproject.com/ja/1.10/ref/contrib/syndication/, "sitemap":https://docs.djangoproject.com/ja/1.10/ref/contrib/sitemaps/) as well as the advantages of a static blog like jekyll (version control).
+1. clone the repo
+2. create a virtual environment and run install the required packages `pip install > requirements`
+3. makemigrations and migrate `python manage.py makemigrations`and `python manage.py migrate`
+4. start the dev-server `python manage.py runserver --settings=howto.settings.dev`
+5. browse to http://127.0.0.1:8000/

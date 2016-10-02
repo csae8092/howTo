@@ -1,11 +1,29 @@
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.http import HttpResponse
 import markdown2
 import requests
 import lxml.etree as ET
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.staticfiles.templatetags.staticfiles import static
+from haystack.query import SearchQuerySet
+from django.http import HttpResponse
 from .models import Post, Book
+
+
+def search_posts(request):
+    context = {}
+    if 'q' in request.GET:
+        searchstring = request.GET.get('q', '')
+        results = SearchQuerySet().models(Post).filter(
+            content=searchstring).load_all()
+        total_results = results.count()
+    else:
+        searchstring = None
+        total_results = None
+        results = None
+    context['searchstring'] = searchstring
+    context['total_results'] = total_results
+    context['results'] = results
+    return render(request, 'blog/blog_search.html', context)
 
 
 def filter_posts_by_usergroups(user):

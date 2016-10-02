@@ -7,4 +7,5 @@ urlpatterns = (
     url(r'^(?P<slug>[\w./-]+)/$', views.post_detail, name='post_detail'),
     url(r'^(?P<slug>[\w./-]+)/md$', views.serialize_text, name='serialize_text'),
     url(r'^(?P<slug>[\w./-]+)/update$', views.update, name='update_text'),
+    url(r'^search', views.search_posts, name='search_posts'),
 )

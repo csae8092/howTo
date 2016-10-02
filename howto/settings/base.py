@@ -33,7 +33,18 @@ INSTALLED_APPS = [
     'webpage',
     'account',
     'blog',
+    'whoosh',
+    'haystack',
 ]
+
+WHOOSH_INDEX = os.path.join(BASE_DIR, 'whoosh/')
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': WHOOSH_INDEX,
+    },
+}
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
 
@@ -53,7 +64,7 @@ ROOT_URLCONF = 'howto.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

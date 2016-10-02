@@ -1,6 +1,7 @@
 import os
 from django.db import models
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 
@@ -80,3 +81,6 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('dynamicblog:post_detail', kwargs={'slug': self.slug})

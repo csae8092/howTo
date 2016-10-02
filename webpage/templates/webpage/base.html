@@ -177,6 +177,18 @@ a:focus {
       <ul class="nav navbar-nav navbar-left">
         <li>{% book_list %}</li>
       </ul>
+      <div class="pull-right">
+                    <form method="get" action="{% url 'dynamicblog:search_posts' %}" class="navbar-form" id="pageform">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="q"/>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true" title="fulltext search over all documents"/>
+                            </button>
+                        </div>
+                    </form>
+                </div>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{% url 'webpage:start' %}">ABOUT</a></li>
         <li><a href="{% url 'webpage:imprint' %}">IMPRINT</a></li>

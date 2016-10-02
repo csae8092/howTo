@@ -7,6 +7,7 @@ django-autocomplete-light==2.2.10
 django-crispy-forms==1.5.2
 django-extensions==1.6.1
 django-filter==0.13.0
+django-haystack==2.5.0
 django-markdown-deux==1.0.5
 django-tables2==1.1.6
 django-taggit==0.21.2
@@ -39,3 +40,4 @@ simplegeneric==0.8.1
 six==1.10.0
 tornado==4.3
 traitlets==4.0.0
+Whoosh==2.7.4

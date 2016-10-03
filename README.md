@@ -35,3 +35,10 @@ The application was build with Python 3.4 and django 1.9.x. It was brought to ru
 3. makemigrations and migrate `python manage.py makemigrations`and `python manage.py migrate`
 4. start the dev-server `python manage.py runserver --settings=howto.settings.dev`
 5. browse to http://127.0.0.1:8000/
+
+### create an index
+Since [this commit](https://github.com/acdh-oeaw/howto/commit/a2728a219b7867dda2d365897ff3c5cd018ec2f9) posts can be search by their full texts. Index and search functions are based on [Whoosh](https://pypi.python.org/pypi/Whoosh/) and [Haystack](http://haystacksearch.org/). 
+To create an index, the following steps have to be done:
+
+1. create a new directory called `whoosh` in the application's root directory. This directory will hold all index data. You can change the name and the location of this directory as it suits you best. But make sure that you updated the `WHOOSH_INDEX`parameter in `howto/settings/base.py` according to your changes.   
+2. run the following `manage.py` command: `python manage.py rebuild_index --settings=howto.settings.dev` and confirm with yes that you want to override any already existing index. Be aware, this command makes of course only sense in case you have alredey written some posts. 

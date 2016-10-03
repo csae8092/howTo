@@ -13,3 +13,4 @@ __pycache__/
 /howto/settings/server_local.py
 /Untitled.ipynb
 /howto/settings/mysql.py
+/whoosh/*

@@ -11,10 +11,17 @@ from .models import Post, Book
 
 def search_posts(request):
     context = {}
+    try:
+        groupname = request.user.groups.all()[0].name
+        if groupname == 'ACDH-CORE':
+            usergroups = ['ACDH-CORE', 'ACDH-EXTENDED', 'PUBLIC']
+        elif groupname == 'ACDH-EXTENDED':
+            usergroups = ['ACDH-EXTENDED', 'PUBLIC']
+    except:
+        usergroups = ['PUBLIC']
     if 'q' in request.GET:
         searchstring = request.GET.get('q', '')
-        results = SearchQuerySet().models(Post).filter(
-            content=searchstring).load_all()
+        results = SearchQuerySet().filter(content=searchstring, audience__in=usergroups).load_all()
         total_results = results.count()
     else:
         searchstring = None

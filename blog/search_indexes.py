@@ -5,6 +5,7 @@ from .models import Post
 class PostIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     pub_date = indexes.DateTimeField(model_attr='created')
+    audience = indexes.CharField(model_attr='audience')
 
     content_auto = indexes.EdgeNgramField(model_attr='title')
 

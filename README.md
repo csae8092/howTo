@@ -25,7 +25,7 @@ The current project tries to combine the advanteges of both worlds.
 * [tags](https://github.com/alex/django-taggit) **done**
 * searching/filtering
     * by tags
-    * fulltext
+    * fulltext (https://github.com/acdh-oeaw/howto/issues/4)
 
 ##install
 The application was build with Python 3.4 and django 1.9.x. It was brought to run on Windows and Centos.

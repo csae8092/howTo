@@ -86,10 +86,9 @@
 <form action="{% url 'dynamicblog:update_text' slug=object.slug %}" method="POST">
 {% csrf_token %}
   <div class="form-group">
-    <label for="url">url to the repo</label>
-    <input type="url" class="form-control" id="email" required="true" name="url" value="{{ object.repo_url }}">
+    <input type="hidden" class="form-control" id="email" required="true" name="url" value="{{ object.repo_url }}">
   </div>
-  <button type="submit" class="btn btn-default">update</button>
+  <button type="submit" class="btn btn-default" data-toggle="tooltip" title="{{ object.repo_url }}!">update</button>
 </form>
 {% endif %}
 {% if object.github_url %}
@@ -103,7 +102,6 @@ Comment/Edit this post on <a href="{{ object.github_url }}">GitHub</a>.<br/>
 <span class="socialShare"> <!-- The share buttons will be inserted here --> </span>
 <script type="text/javascript">
   $(function (){
-    var url = 'http://tutorialzine.com/2014/08/cool-share-jquery-plugin/';
     var options = {
       twitter: {
         text: 'Read about "{{ object.title }}" here:',

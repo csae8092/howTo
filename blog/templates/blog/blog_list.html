@@ -1,16 +1,17 @@
 {% extends "webpage/base.html" %}
 {% load staticfiles %}
 {% block Titel %}
-table of content
+Table of content
 {% endblock %}
 {% block scriptHeader %}
 {% endblock %}
 {% block content %}
 <style>
 
+
 .grid-item {
   float: left;
-  
+
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 20px;
@@ -93,13 +94,17 @@ table of content
   border-color: #ffffff;
 }
 .post-title {
-  
+
   font-weight: bold;
 }
 
 .post-subtitle {
   color: #696969;
   font-weight: bold;
+}
+.book-image {
+  border: 5px solid black;
+  margin: 15px;
 }
 
 .grid-item.grid-item--2 .hrmain {
@@ -108,26 +113,33 @@ table of content
 .grid-item.grid-item--3 .hrmain {
   border-color: #007bb4;
 }
+@media (min-width: 480px) and (max-width: 768px) {
+
+  .grid-item { width: calc(94% / 2); }
+  .book-image { width: 50% }
+}
+@media (max-width: 480px) {
+
+  .grid-item { width: 94%; }
+  .book-image { width: 50% }
+
+}
 
 #blogjumbo {
   background-color: #e7ecef;
 }
 .blog-name {
-  
   font-weight: bold;
  /* border-bottom: 3px solid black;*/
 }
-.book-image {
-  border: 5px solid black;
-  margin: 15px;
-}
+
 </style>
 <!--Mansory JS-->
 <script type="text/javascript" src="https://npmcdn.com/masonry-layout@4.0.0/dist/masonry.pkgd.min.js"></script>
 
 
 <div class="jumbotron text-center" id="blogjumbo">
-  
+
 {% if book %}
     <h1 class="blog-name">{{ book.title }}</h1>
     <p>{{ book.summary }}</p>
@@ -146,64 +158,75 @@ table of content
 
 
 <div class="text-center">
- 
-    
-<div class="grid">
+
+<div class="grid" >
+
         {% for object in object_list %}
 
         {% if object.book_id == 3 %}
-        
+
         <div class="grid-item grid-item--2 post-preview">
-          
+
             <a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">
-                <h2 class="post-title">
+                <h2 class="post-title" data-title="{{ object.title }}">
                     {{ object.title }}
                 </h2>
             </a>
             <hr class="hrmain">
+            <a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">
             <h3 class="post-subtitle">
                 {{ object.summary }}
             </h3>
+            </a>
             <!-- <p class="post-meta">Posted by <a href="{{ object.author.website }}">{{ object.author }}</a><br/> on {{ object.created}} (last update {{ object.updated }})
             </p> -->
-         
+
         </div>
-       
+
         {% elif object.book_id == 1 %}
         <div class="grid-item grid-item--3 post-preview">
+
             <a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">
-                <h2 class="post-title">
+                <h2 class="post-title" data-title="{{ object.title }}">
                     {{ object.title }}
                 </h2>
             </a>
             <hr class="hrmain">
+            <a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">
             <h3 class="post-subtitle">
                 {{ object.summary }}
             </h3>
+            </a>
             <!-- <p class="post-meta">Posted by <a href="{{ object.author.website }}">{{ object.author }}</a><br/> on {{ object.created}} (last update {{ object.updated }})
             </p> -->
+
         </div>
         {% else %}
         <div class="grid-item grid-item--4 post-preview">
+
             <a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">
-                <h2 class="post-title">
+                <h2 class="post-title" data-title="{{ object.title }}">
                     {{ object.title }}
                 </h2>
             </a>
             <hr class="hrmain">
+            <a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">
             <h3 class="post-subtitle">
                 {{ object.summary }}
             </h3>
+            </a>
             <!-- <p class="post-meta">Posted by <a href="{{ object.author.website }}">{{ object.author }}</a><br/> on {{ object.created}} (last update {{ object.updated }})
             </p> -->
+
         </div>
         {% endif %}
-  
+
         {% endfor %}
 </div>
-    
- 
+
+
  </div>
+ <!--Masonry-->
  <script type="text/javascript">
 
 $(window).on('load resize', function (){
@@ -215,5 +238,11 @@ $('.grid').masonry({
 });
 });
 </script>
-    
+
+
+
+
+
+
+
 {% endblock %}

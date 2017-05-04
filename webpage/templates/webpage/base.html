@@ -58,15 +58,16 @@ flex-direction: column;
 height: 100%;
 font-family: "Lato", sans-serif;
 font-size: 18px;
+padding-top: 70px;
 }
 .wrap {
-  white-space: pre-wrap;      /* CSS3 */  
-  white-space: -moz-pre-wrap; /* Firefox */    
-  white-space: -pre-wrap;     /* Opera <7 */  
-  white-space: -o-pre-wrap;   /* Opera 7 */    
+  white-space: pre-wrap;      /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -pre-wrap;     /* Opera <7 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
   word-wrap: break-word;      /* IE */
 
-} 
+}
 header {
 flex: 0 0 auto;
 }
@@ -108,8 +109,8 @@ background-color: #ffffff !important;
   color:#242424;
   background-color: #ffffff;
 }*/
-.navbar-default .navbar-nav>.open>a, 
-.navbar-default .navbar-nav>.open>a:hover, 
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:hover,
 .navbar-default .navbar-nav>.open>a:focus {
    color:#242424;
   background-color: #ffffff;
@@ -129,7 +130,7 @@ padding-top:0;
 .navlink img {
  padding-top: 10px;
  padding-bottom: 10px;
- 
+
 }
 
 #footer-info {
@@ -144,6 +145,16 @@ padding-top:0;
 #githublogo {
   width: 20%;
 }
+@media (max-width: 767px) {
+      #acdhlogo,
+      #ccbylogo {
+          width: 15%;
+      }
+      #githublogo {
+        width: 7%;
+      }
+  }
+
 a {
   outline: 0;
 }
@@ -152,6 +163,9 @@ a:focus {
 }
 #blogjumbo {
   background-color: #e7ecef;
+}
+.navbar-header > .navbar-toggle > .icon-bar {
+  background-color: #242424;
 }
 </style>
 
@@ -211,9 +225,7 @@ a:focus {
 
 </header>
 
-    <div class="alert alert-danger">
-      <strong>Be Aware!</strong> This Site/Service is at a very early state of developement. Everything can change at any time.
-    </div>
+
 
     <section class="main-content">
 
@@ -221,13 +233,13 @@ a:focus {
         {% block content %}
         {% endblock %}
       </div>
-      
+
     </section>
 
     <footer>
-      
+
 <!-- <hr class="hrfooter"> -->
-      
+
 <!-- <hr class="hrfooter"> -->
 <div class="container" >
   <div id="footer-info">
@@ -236,36 +248,36 @@ a:focus {
         <h4><span class="glyphicon glyphicon-map-marker"></span>  Vienna, Austria</h4>
 <h4><span class="glyphicon glyphicon-envelope"></span>  acdh-tech@oeaw.ac.at </h4>
 
-     
+
       </div>
         <div class="col-sm-3">
           <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/ACDH_transparent.png' %}" alt="ACDH" id="acdhlogo"/>   
+              <img src="{% static 'webpage/img/ACDH_transparent.png' %}" alt="ACDH" id="acdhlogo" title="Austrian Centre for Digital Humanities"/>
           </a>
         </div>
         <div class="col-sm-3 ">
             <a href="{% projects_metadata 'github' %}" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/GitHub-Mark-64px.png' %}" alt="{{ metadata.github }}" id="githublogo"/>   
+              <img src="{% static 'webpage/img/GitHub-Mark-64px.png' %}" alt="{{ metadata.github }}" id="githublogo" title="ACDH Github"/>
             </a>
         </div>
         <div class="col-sm-3">
             <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/by-sa.png' %}" alt="CC-BY-SA-4.0" id="ccbylogo"/>                 
+              <img src="{% static 'webpage/img/by-sa.png' %}" alt="CC-BY-SA-4.0" id="ccbylogo" title="CC-BY-SA-4.0 license"/>
             </a>
         </div>
-        
+
       </div>
     </div>
   </div>
-     
-     
+
+
 
     </footer>
 
     {% block scripts %}
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>
-    <!-- scroll-up-bottom -->        
+    <!-- scroll-up-bottom -->
     <script type="text/javascript">
             // Setup plugin with default settings
             $(document).ready(function() {
@@ -276,7 +288,7 @@ a:focus {
                 });
             });
     </script>
- 
+
 
     {% endblock %}
   </body>

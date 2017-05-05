@@ -6,9 +6,8 @@ Table of content
 {% block scriptHeader %}
 {% endblock %}
 {% block content %}
+
 <style>
-
-
 .grid-item {
   float: left;
 
@@ -18,81 +17,72 @@ Table of content
   padding-bottom: 20px;
   position: relative;
 }
-
-.grid-item--2 {
+/*clean if grid-item*/
+{% for object in object_list %}
+{% if object.book %}
+.grid-item--{{object.book_id}} {
    margin: 1%;
-    border: 5px solid #f52c47;
-    color: #f52c47;
+    border: 5px solid {{object.book.book_color}};
+    color: {{object.book.book_color}};
     float: left;
     width: calc(94% / 3);
     background-color: #ffffff;
     position: relative;
 }
-.grid-item.grid-item--2:hover,
-.grid-item.grid-item--2:hover .post-title,
-.grid-item.grid-item--2:hover .post-subtitle {
-  background-color: #f52c47;
+
+.grid-item.grid-item--{{object.book_id}}:hover,
+.grid-item.grid-item--{{object.book_id}}:hover .post-title,
+.grid-item.grid-item--{{object.book_id}}:hover .post-subtitle {
+  background-color: {{object.book.book_color}};
   color:#ffffff;
 
 }
-.grid-item.grid-item--2:hover .hrmain {
+.grid-item.grid-item--{{object.book_id}} .hrmain {
+  border-color: {{object.book.book_color}};
+}
+.grid-item.grid-item--{{object.book_id}}:hover .hrmain {
   border-color: #ffffff;
 }
 
-.grid-item--2 a {
-  color:#f52c47;
+.grid-item--{{object.book_id}} a {
+  color:{{object.book.book_color}};
   text-decoration: none;
 }
+{% endif %}
+{% endfor %}
+/*end of clean grid-item*/
 
-.grid-item--3 {
-  float: left;
-  width: calc(94% / 3);
-  background: #ffffff;
-  border: 5px solid #007bb4;
-  color:#007bb4;
-  margin:1%;
-  position: relative;
-}
-.grid-item--3 a {
-  color:#007bb4;
-  text-decoration: none;
-}
-.grid-item.grid-item--3:hover,
-.grid-item.grid-item--3:hover .post-title,
-.grid-item.grid-item--3:hover .post-subtitle {
-  background-color: #007bb4;
-  color:#ffffff;
-
-}
-.grid-item.grid-item--3:hover .hrmain {
-  border-color: #ffffff;
-}
-.grid-item--4 {
+/*grid-item-no-book-id or no book_color*/
+.grid-item--no-book-id {
     margin: 1%;
-  border: 5px solid #2bb673;
-  color: #2bb673;
+  border: 5px solid #587583;
+  color: #587583;
   float: left;
   width: calc(94% / 3);
   background-color: #ffffff;
   position: relative;
 }
-.grid-item--4 a {
-  color:#2bb673;
+.grid-item--no-book-id a {
+  color:#587583;
   text-decoration: none;
 }
-.grid-item.grid-item--4:hover,
-.grid-item.grid-item--4:hover .post-title,
-.grid-item.grid-item--4:hover .post-subtitle {
-  background-color: #2bb673;
+.grid-item.grid-item--no-book-id:hover,
+.grid-item.grid-item--no-book-id:hover .post-title,
+.grid-item.grid-item--no-book-id:hover .post-subtitle {
+  background-color: #587583;
   color:#ffffff;
 
 }
-.grid-item.grid-item--4 .hrmain {
-  border-color: #2bb673;
+.grid-item.grid-item--no-book-id .hrmain {
+  border-color: #587583;
 }
-.grid-item.grid-item--4:hover .hrmain {
+.grid-item.grid-item--no-book-id:hover .hrmain {
   border-color: #ffffff;
 }
+
+/*end of grid-item-no-book-id*/
+
+
 .post-title {
 
   font-weight: bold;
@@ -107,12 +97,8 @@ Table of content
   margin: 15px;
 }
 
-.grid-item.grid-item--2 .hrmain {
-  border-color: #f52c47;
-}
-.grid-item.grid-item--3 .hrmain {
-  border-color: #007bb4;
-}
+
+
 @media (min-width: 480px) and (max-width: 768px) {
 
   .grid-item { width: calc(94% / 2); }
@@ -133,6 +119,63 @@ Table of content
  /* border-bottom: 3px solid black;*/
 }
 
+
+/*for button in filtering */
+.button {
+  background-color: white;
+  border: 2px solid #ccc;
+  margin-bottom: 10px;
+  padding: 12px 20px 12px 20px;
+  white-space: normal;
+}
+
+.button:hover {
+  background-color: #e7ecef;
+  border-color: #ccc;
+  color: #222;
+
+}
+
+.button:active,
+.button.is-checked {
+  background-color: #007bb4;
+  border-color: #007bb4;
+}
+
+.button.is-checked {
+  color: white;
+  border-color: #007bb4;
+  /*text-shadow: 0 -1px hsla(0, 0%, 0%, 0.8);*/
+}
+
+.button:active, .button.is-checked {
+  /*box-shadow: inset 0 1px 10px hsla(0, 0%, 0%, 0.8);*/
+  border-color: #007bb4;
+  border-radius: 0;
+}
+
+.button-group .button {
+  border-radius: 0;
+}
+#quicksearch {
+    width: 30%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 0px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url({% static 'blog/img/search.png' %});
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+#quicksearch:focus {
+    width: 60%;
+}
+
 </style>
 <!--Mansory JS-->
 <script type="text/javascript" src="https://npmcdn.com/masonry-layout@4.0.0/dist/masonry.pkgd.min.js"></script>
@@ -147,10 +190,11 @@ Table of content
         <img src="{{ book.image.url }}" width="300" class="book-image"/>
     {% endif %}
 
+
     <p>edited by <a href="{{ book.editor.website }}">{{ book.editor }}</a></p>
 {% else %}
   <h1 class="blog-name">HowTo</h1>
-  <p>A blog about how to do things</p>
+  <p>A blog about how to do things in Digital Humanities</p>
 {% endif %}
 
 </div>
@@ -158,33 +202,36 @@ Table of content
 
 
 <div class="text-center">
+<div>
+  {% if not book %}
+  <h2>Filter by tags</h2>
+
+  <div class="button-group filters-button-group" id="filters">
+    <button class="button btn btn-default is-checked" data-filter="*">show all</button>
+
+    {% for x in tag_list %}
+    <button class="button btn btn-default" data-filter=".{{x}}">{{x}}</button>
+    {% endfor %}
+  </div>
+
+  <p><input type="text" class="quicksearch" placeholder="Search" id="quicksearch"/></p>
+
+  {% else %}
+
+
+  <p><input type="text" class="quicksearch" placeholder="Search" id="quicksearch"/></p>
+
+  {% endif %}
+
+</div>
 
 <div class="grid" >
 
         {% for object in object_list %}
 
-        {% if object.book_id == 3 %}
+        {% if object.book_id and object.book.book_color %}
 
-        <div class="grid-item grid-item--2 post-preview">
-
-            <a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">
-                <h2 class="post-title" data-title="{{ object.title }}">
-                    {{ object.title }}
-                </h2>
-            </a>
-            <hr class="hrmain">
-            <a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">
-            <h3 class="post-subtitle">
-                {{ object.summary }}
-            </h3>
-            </a>
-            <!-- <p class="post-meta">Posted by <a href="{{ object.author.website }}">{{ object.author }}</a><br/> on {{ object.created}} (last update {{ object.updated }})
-            </p> -->
-
-        </div>
-
-        {% elif object.book_id == 1 %}
-        <div class="grid-item grid-item--3 post-preview">
+        <div class="grid-item grid-item--{{object.book_id}} post-preview   {% for tag in object.tags.all %} {{ tag.name }} </li> {% endfor %}">
 
             <a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">
                 <h2 class="post-title" data-title="{{ object.title }}">
@@ -201,8 +248,9 @@ Table of content
             </p> -->
 
         </div>
+
         {% else %}
-        <div class="grid-item grid-item--4 post-preview">
+        <div class="grid-item grid-item--no-book-id post-preview   {% for tag in object.tags.all %} {{ tag.name }} </li> {% endfor %}">
 
             <a href="{% url 'dynamicblog:post_detail' slug=object.slug %}">
                 <h2 class="post-title" data-title="{{ object.title }}">
@@ -219,6 +267,10 @@ Table of content
             </p> -->
 
         </div>
+
+
+
+
         {% endif %}
 
         {% endfor %}
@@ -226,23 +278,72 @@ Table of content
 
 
  </div>
- <!--Masonry-->
- <script type="text/javascript">
+
+<!--Isotope-->
+<script type="text/javascript">
 
 $(window).on('load resize', function (){
-// $('.content .right').width( $(this).width() - 480 );
-$('.grid').masonry({
-  // options
+$('.grid').isotope({
+ itemSelector: '.grid-item',
+});
+
+});
+
+// quick search regex
+var qsRegex;
+var buttonFilter;
+
+// init Isotope
+var $grid = $('.grid').isotope({
   itemSelector: '.grid-item',
-  // columnWidth: 200
+  // layoutMode: 'fitRows',
+  filter: function() {
+    var $this = $(this);
+    var searchResult = qsRegex ? $this.text().match( qsRegex ) : true;
+    var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
+    return searchResult && buttonResult;
+  }
 });
+
+$('#filters').on( 'click', 'button', function() {
+  buttonFilter = $( this ).attr('data-filter');
+  $grid.isotope();
 });
+
+// use value of search field to filter
+var $quicksearch = $('#quicksearch').keyup( debounce( function() {
+  qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+  $grid.isotope();
+}) );
+
+
+  // change is-checked class on buttons
+$('.button-group').each( function( i, buttonGroup ) {
+  var $buttonGroup = $( buttonGroup );
+  $buttonGroup.on( 'click', 'button', function() {
+    $buttonGroup.find('.is-checked').removeClass('is-checked');
+    $( this ).addClass('is-checked');
+  });
+});
+
+
+// debounce so filtering doesn't happen every millisecond
+function debounce( fn, threshold ) {
+  var timeout;
+  return function debounced() {
+    if ( timeout ) {
+      clearTimeout( timeout );
+    }
+    function delayed() {
+      fn();
+      timeout = null;
+    }
+    setTimeout( delayed, threshold || 100 );
+  };
+}
+
+
 </script>
-
-
-
-
-
 
 
 {% endblock %}

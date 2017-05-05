@@ -74,7 +74,14 @@ def books(request, slug):
 def post_list(request):
     userobject = request.user
     posts = filter_posts_by_usergroups(userobject)
-    return render(request, 'blog/blog_list.html', {'object_list': posts})
+    tags = []
+    for x in posts:
+        for y in x.tags.names():
+            tags.append(y)
+    context = {}
+    context['object_list'] = posts
+    context['tag_list'] = set(tags)
+    return render(request, 'blog/blog_list.html', context)
 
 
 def post_detail(request, slug):

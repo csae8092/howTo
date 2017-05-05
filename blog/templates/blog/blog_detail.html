@@ -15,25 +15,24 @@
   text-align: justify;
   /*  margin-top: 100px;*/
   }
-  #content  img { 
-  max-width:1000px; 
-  height:auto; 
+  #content  img {
+  max-width:1000px;
+  height:auto;
   margin: 25px auto;
-  display:block 
+  display:block
   }
-     
-  .post-title--3 {
+  /*dynamic post-title*/
+  {% if object.book_id %}
+  .post-title--{{object.book_id}} {
   font-weight: bold;
-  color: #f52c47;
+  color: {{object.book.book_color}};
   }
-   
-  .post-title--1 {
-   font-weight: bold;
-   color: #007bb4;
-  }
+  {% endif %}
+   /*end of dynamic post-title*/
+
   .post-title--other {
     font-weight: bold;
-   color: #2bb673;
+   color: #587583;
   }
   .post-meta {
   font-style: italic;
@@ -45,11 +44,10 @@
 {% block content %}
 
 
-{% if object.book_id == 3 %}
-<h1 class="post-title--3">{{ object.title }}</h1>
+{% if object.book_id %}
+<h1 class="post-title--{{object.book_id}}">{{ object.title }}</h1>
 <!-- <h3 class="post-author">by {{ object.author }}</h3> -->
-{% elif object.book_id == 1 %}
-<h1 class="post-title--1">{{ object.title }}</h1>
+
 
 {% else %}
 <h1 class="post-title--other">{{ object.title }}</h1>

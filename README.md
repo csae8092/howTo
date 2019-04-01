@@ -1,7 +1,7 @@
 # howTo
 A blog application which uses GitHub as data storage.
 
-##motivation 
+## motivation 
 Blog applications usually come along either in form of highly elaborated content managment systems (CMS) (e.g. Wordpress) or static blogs (e.g. Jekyll). The first category provides a rich feature list (tagging, commets, feeds, fultext searches, user management, ...) and is in general very easy to install and use. The downside is that those applications can't be customize without digging into the dephts of the application's codebase. 
 Static blogs like Jekyll instead are propably easyer to customize, especially when it comes to the questions where the content of the blog is actually stored. But they lack many of the features which CMS based blogs provide easily.
 The current project tries to combine the advanteges of both worlds. 
@@ -27,7 +27,7 @@ The current project tries to combine the advanteges of both worlds.
     * by tags
     * fulltext (https://github.com/acdh-oeaw/howto/issues/4)
 
-##install
+## install
 The application was build with Python 3.4 and django 1.9.x. It was brought to run on Windows and Centos.
 
 1. clone the repo

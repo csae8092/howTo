@@ -48,6 +48,7 @@
         <noscript>
             <p><img src="//piwik.apollo.arz.oeaw.ac.at/piwik.php?idsite=38" style="border:0;" alt="" /></p>
         </noscript>
+      <!-- End Piwik Code -->
 <style>
 html {
 height: 100%;
@@ -168,9 +169,6 @@ a:focus {
   background-color: #242424;
 }
 </style>
-
-
-<!-- End Piwik Code -->
       {% block scriptHeader %}
       {% endblock %}
   </head>
@@ -222,11 +220,7 @@ a:focus {
     </div>
   </div>
 </nav>
-
 </header>
-
-
-
     <section class="main-content">
 
       <div id="content" class="container">
@@ -237,10 +231,6 @@ a:focus {
     </section>
 
     <footer>
-
-<!-- <hr class="hrfooter"> -->
-
-<!-- <hr class="hrfooter"> -->
 <div class="container" >
   <div id="footer-info">
       <div class="row text-center">
@@ -251,17 +241,17 @@ a:focus {
 
       </div>
         <div class="col-sm-3">
-          <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank">
-              <img src="{% static 'webpage/img/ACDH_transparent.png' %}" alt="ACDH" id="acdhlogo" title="Austrian Centre for Digital Humanities"/>
+          <a href="https://www.oeaw.ac.at/acdh/" class="navlink">
+              <img src="{% static 'webpage/img/acdh_logo_black_with_text.png' %}" alt="ACDH" id="acdhlogo" title="Austrian Centre for Digital Humanities"/>
           </a>
         </div>
         <div class="col-sm-3 ">
-            <a href="{% projects_metadata 'github' %}" class="navlink" target="_blank">
+            <a href="{% projects_metadata 'github' %}" class="navlink">
               <img src="{% static 'webpage/img/GitHub-Mark-64px.png' %}" alt="{{ metadata.github }}" id="githublogo" title="ACDH Github"/>
             </a>
         </div>
         <div class="col-sm-3">
-            <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="navlink" target="_blank">
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="navlink">
               <img src="{% static 'webpage/img/by-sa.png' %}" alt="CC-BY-SA-4.0" id="ccbylogo" title="CC-BY-SA-4.0 license"/>
             </a>
         </div>
@@ -269,11 +259,7 @@ a:focus {
       </div>
     </div>
   </div>
-
-
-
-    </footer>
-
+  </footer>
     {% block scripts %}
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>
@@ -288,8 +274,6 @@ a:focus {
                 });
             });
     </script>
-
-
     {% endblock %}
   </body>
 </html>

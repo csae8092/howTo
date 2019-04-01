@@ -4,9 +4,7 @@
 {{ object.slug }}
 {% endblock %}
 {% block scriptHeader %}
-    <!-- markdwon extension https://github.com/richleland/pygments-css -->
 <link rel="stylesheet" href="{% static 'blog/css/colorful.css' %}"/></link>
-<!-- cool-share plugin http://tutorialzine.com/2014/08/cool-share-jquery-plugin/ -->
 <link rel="stylesheet" href="{% static 'blog/js/cool-share/plugin.css' %}"/></link>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
 <script src="{% static 'blog/js/cool-share/plugin.js' %}"/></script>
@@ -42,27 +40,14 @@
 </style>
 {% endblock %}
 {% block content %}
-
-
 {% if object.book_id %}
 <h1 class="post-title--{{object.book_id}}">{{ object.title }}</h1>
-<!-- <h3 class="post-author">by {{ object.author }}</h3> -->
-
-
 {% else %}
 <h1 class="post-title--other">{{ object.title }}</h1>
-
-
 {% endif %}
-
 <h3 class="post-meta"><b>Posted by</b> <a href="{{ object.author.website }}">{{ object.author }}</a><br/> on {{ object.created}} (last update {{ object.updated }})
             </h3>
 <h4 class="post-meta"><b>status:</b> {{ object.status }}</h4>
-<!-- <h5 class="post-meta"><b>tags</b></h5>
-{% for tag in object.tags.all %}
-    <li class="post-meta">{{ tag }}</li>
-{% endfor %} -->
-
 {% if updated %}
 {{ updated }}
 {% endif %}
@@ -78,7 +63,6 @@
 {% if tei_text %}
 {{ tei_text|safe }}
 {% endif %}
-
 <hr/>
 {% if request.user.is_superuser %}
 <form action="{% url 'dynamicblog:update_text' slug=object.slug %}" method="POST">
@@ -92,10 +76,7 @@
 {% if object.github_url %}
 Comment/Edit this post on <a href="{{ object.github_url }}">GitHub</a>.<br/>
 {% endif %}
-
-
 <a href="{% url 'dynamicblog:serialize_text' slug=object.slug %}">export blog text </a><br/>
-
 <hr/>
 <span class="socialShare"> <!-- The share buttons will be inserted here --> </span>
 <script type="text/javascript">
@@ -112,7 +93,4 @@ Comment/Edit this post on <a href="{{ object.github_url }}">GitHub</a>.<br/>
 });
 
 </script>
-
-
-
 {% endblock %}

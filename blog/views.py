@@ -82,7 +82,7 @@ def post_list(request):
     context['object_list'] = posts
     context['tag_list'] = set(tags)
     return render(request, 'blog/blog_list.html', context)
-
+    
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
@@ -98,6 +98,11 @@ def post_detail(request, slug):
     context['object'] = post
     context['md_text'] = md_text
     context['tei_text'] = tei_text
+    ''' check for auth or PUBLIC post '''
+    if request.user.is_authenticated() or post.audience == 'PUBLIC':
+        return render(request, 'blog/blog_detail.html', context)
+    else:
+        return render(request, 'blog/access_error.html')
     return render(request, 'blog/blog_detail.html', context)
 
 
